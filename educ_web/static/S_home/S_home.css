@@ -1,0 +1,353 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-link {
+    font-weight: bold;
+    color: #454545;
+}
+
+.nav-link:hover {
+    color:#2a5af8;
+}
+
+.user-pic {
+    width: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 5%;
+    width: 320px; 
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu {
+    max-height: 400px;
+    
+}
+
+.sub-menu {
+    background: #ffffff;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid rgb(148, 148, 148);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info h4 {
+    font-weight: 500;
+    font-size: 23px;
+}
+
+.user-info img {
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    margin: 15px 0 10px;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+}
+
+.sub-menu-link p {
+    width: 100%;
+    margin-top: 17px;
+}
+
+.sub-menu-link img {
+    width: 40px;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+.sub-menu-link span {
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+
+.sub-menu-link:hover span {
+    transform: translateX(5px);
+}
+
+.sub-menu-link:hover p {
+    font-weight: 600;
+}
+
+
+
+/* Dashboard Calendar */
+
+.dashboard-calendar {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.day {
+    width: 7.5%;
+    height: 140px;
+    background-color: #BFDFF1;
+    border-radius: 20px;
+    margin: 7px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.day:hover {
+    background-color: #3443CF;
+    color: #ffffff;
+}
+
+.day h6 {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.next-button:hover {
+    transform: translateX(7px);
+    transition: 0.2s ease-in-out;
+}
+
+/* Dashboard Courses */
+
+.dashboard-courses {
+    margin-top: 80px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.courses {
+    width: 23%;
+    height: 470px;
+    background-color: #BFDFF1;
+    border-radius: 40px;
+    margin: 20px;
+    box-shadow: 0px 2px 10px rgba(122, 122, 122, 0.5);
+}
+
+.courses img {
+    width: 100%;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.professor {
+    display: flex;
+    align-items: center;
+}
+
+.professor img {
+    width: 25%;
+    cursor: default;
+}
+
+.professor p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.add-course {
+    position: inherit;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    margin: 20px;
+    height: 295px;
+}
+
+.add-course h5 {
+    text-align: center;
+    color: #111a6d;
+    width: 100%;
+}
+
+.add-course img {
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.add-course img:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
+}
+
+
+/* Create-class */
+.cancel-create-button {
+    color: #827B7B;
+}
+
+.cancel-create-button:hover {
+    color: #000000;
+}
+
+.create-button {
+    color: #827B7B;
+}
+
+.create-button:hover {
+    color: #000000;
+}
+
+/* Join-class */
+.cancel-join-button {
+    color: #827B7B;
+}
+
+.cancel-join-button:hover {
+    color: #000000;
+}
+
+.join-button {
+    color: #827B7B;
+}
+
+.join-button:hover {
+    color: #000000;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+
+    .logo {
+        width: 130px;
+        height: 50px;
+    }
+
+    .sub-menu-wrap {
+        width: 200px;
+        position: relative;
+    }
+
+    .user-info h4 {
+        font-size: 14px;
+    }
+
+    .user-info img {
+        width: 40px;
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .sub-menu-link {
+        margin: 0;
+    }
+
+    .sub-menu-link img {
+        padding: 2px;
+        margin-right: 5px;
+    }
+
+    .sub-menu-link span {
+        font-size: 12px;
+    }
+
+    .sub-menu-link img {
+        width: 20px;
+    }
+
+    .sub-menu-link p {
+        font-size: 12px;
+    }
+
+    .dashboard-header {
+        width: 300px;
+    }
+
+    .dashboard-calendar {
+        margin-top: 10px;
+    }
+
+    .day {
+        width: 50px;
+        height: 80px;
+        margin: 5px;
+        border-radius: 10px;
+    }
+
+    .day h6 {
+        font-size: 12px;
+    }
+
+    .day h2 {
+        font-size: 20px;
+    }
+
+    .dashboard-courses {
+        margin-top: 20px;
+    }
+
+    .courses {
+        width: 30%;
+        height: 250px;
+        border-radius: 10px;
+        margin: 7px;
+    }
+
+    .courses img {
+        padding: 8px;
+    }
+
+    .courses h5 {
+        font-size: 14px;
+    }
+
+    .courses h6 {
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .professor p {
+        font-size: 11px;
+        margin-left: 20px;
+        margin-top: 0;
+    }
+
+    .professor img {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .add-course {
+        height: 235px;
+        border-radius: 10px;
+        margin: 7px;
+    }
+
+
+}

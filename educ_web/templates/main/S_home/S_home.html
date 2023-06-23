@@ -1,0 +1,393 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block script %}
+    <link href="{% static 'S_home/S_home.css' %}" rel="stylesheet">
+    <script src="{% static 'S_home/S_home.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block navbar %}
+    <div class="nav-bar">
+        <nav class="navbar navbar-expand-lg"
+            style="background-color: #BFDFF1; padding: 15px;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static '/images/logo.png' %}" alt="logo" height="60" width="170" style="margin-left: 50px;">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}" style="padding-right: 20px;"><i class="fa-solid fa-inbox"
+                                    style="padding: 10px;"></i>Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'todo' %}" style="padding-right: 20px;"><i class="fa-solid fa-file"
+                                    style="padding: 10px;"></i>To do</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="user-id-calendar" class="nav-link {{ user.id }}" href="{% url 'calendar' %}" style="padding-right: 20px;"><i
+                                    class="fa-solid fa-calendar-days" style="padding: 10px;"></i>Calendar</a>
+                        </li>
+                    </ul>
+
+                    {% if user_profile %}
+                        <img src="{{ user_profile }}" class="user-pic" onclick="toggleMenu()">
+                    {% elif user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                    {% else %}
+                        <!-- <img src="{% static 'images/Profile.png' %}" class="user-pic" onclick="toggleMenu()"> -->
+                        <img src="{% static 'images/user-person.png' %}" class="user-pic" onclick="toggleMenu()">
+                    {% endif %}
+
+                    <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                {% if user_profile %}
+                                    <img src="{{ user_profile }}" alt="User Image">
+                                {% elif user.profile_picture %}
+                                    <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                                {% else %}
+                                    <img src="{% static 'images/user-person.png' %}" alt="User Image">
+                                {% endif %}
+
+                                {% if user.first_name %}
+                                    <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                                {% else %}
+                                    <h4>{{ user.username }}</h4>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <a href="#" class="sub-menu-link" data-bs-toggle="modal" data-bs-target="#manual-modal">
+                                <img src="{% static 'images/user-image.png' %}">
+                                <p>Edit Profile</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'account_logout' %}" class="sub-menu-link">
+                                <img src="{% static 'images/logout.png' %}">
+                                <p>Sign Out</p>
+                                <span>></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container" style="text-align: center; margin-top: 50px;">
+            <img class="dashboard-header" src="{% static '/images/dashboard.png' %}" alt="Dashboard">
+
+            <div class="dashboard-calendar">
+                <div class="day">
+                    <h6>Sun</h6>
+                    <h2>16</h2>
+                </div>
+                <div class="day">
+                    <h6>Mon</h6>
+                    <h2>17</h2>
+                </div>
+                <div class="day">
+                    <h6>Tues</h6>
+                    <h2>18</h2>
+                </div>
+                <div class="day">
+                    <h6>Wed</h6>
+                    <h2>19</h2>
+                </div>
+                <div class="day">
+                    <h6>Thurs</h6>
+                    <h2>20</h2>
+                </div>
+                <div class="day">
+                    <h6>Frid</h6>
+                    <h2>21</h2>
+                </div>
+                <div class="day">
+                    <h6>Sat</h6>
+                    <h2>22</h2>
+                </div>
+                <div class="next-button" style="cursor: pointer;">
+                    <img src="{% static '/images/next-button.png' %}">
+                </div>
+            </div>
+            <div class="dashboard-courses">
+                <!-- render enrolled course of this user -->
+                {% if enrolled_course %}
+                    {% for course in enrolled_course %}
+                        <div class="courses">
+                            <a href="{% url 'student_stream' course_id=course.id %}">
+                                <img src="{% static '/images/d1.png' %}" title="Web Development">
+                                <h4 style="text-align: left; padding-left: 20px;">{{ course.name | title }}</h4>
+                                <h6 style="text-align: left; padding-left: 20px;">
+                                    {% if course.course_code %}
+                                        {{ course.course_code | upper }}
+                                    {% endif %}
+                                    <br />
+                                    {% if course.section %}
+                                        {{ course.section | upper }}
+                                    {% endif %}
+                                </h6>
+                            </a>
+                            <div class="professor">
+                                <img src="{% static '/images/prof1.png' %}">
+                                <p>{{ course.instructor.username | title }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h1>No Enrolled Course Yet...</h1>
+                {% endif %}
+            </div>
+        </div>
+        <hr />
+        <div class="container"
+            style="text-align: center; justify-content: center; display: flex; padding-bottom: 50px;">
+            <!-- render instructed course of this user -->
+            {% for course in instruct_course %}
+                <div class="courses">
+                    <a href="{% url 'instruct_stream' course_id=course.id %}">
+                        <img src="{% static '/images/d1.png' %}" title="Web Development">
+                        <h4 style="text-align: left; padding-left: 20px;">{{ course.name | title }}</h4>
+                        <h6 style="text-align: left; padding-left: 20px;">
+                            {% if course.course_code %}
+                                {{ course.course_code | upper }}
+                            {% endif %}
+                            <br />
+                            {% if course.section %}
+                                {{ course.section | upper }}
+                            {% endif %}
+                        </h6>
+                    </a>
+                    <div class="professor">
+                        <img src="{% static '/images/prof1.png' %}">
+                        <p>{{ course.instructor.username | title }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="courses">
+                <div class="add-course">
+                    <h5 style="padding-top: 40px;">Create a Class</h5>
+                    <img src="{% static '/images/Add.png' %}" data-bs-toggle="modal" data-bs-target="#create-class"
+                        title="Create Class">
+                    <div class="modal fade" id="create-class" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: #3443CF;">Create
+                                        Class</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="create-class-form" id="create-class-form" action="{% url 'save_course' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" name="class_name" placeholder="Class Name (Required)" class="form-control"
+                                            required
+                                            style="margin: 20px; border-radius: 30px; background-color: #BFDFF1; width: 90%; height: 40px;">
+                                        <input type="text" name="course_code" placeholder="Course Code (Required)" class="form-control"
+                                            required style="margin: 20px;  border-radius: 30px; background-color: #BFDFF1; width: 90%; height: 40px">
+                                        <input type="text" name="section" placeholder="Section" class="form-control"
+                                            style="margin: 20px;  border-radius: 30px; background-color: #BFDFF1; width: 90%; height: 40px">
+                                        <input type="text" name="room" placeholder="Room" class="form-control"
+                                            style="margin: 20px;  border-radius: 30px; background-color: #BFDFF1; width: 90%; height: 40px">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-bs-dismiss="modal" class="cancel-create-button"
+                                        style="border-color: transparent; background-color: transparent;">Cancel</button>
+                                    <button type="submit" form="create-class-form" class="create-button" id="add-course"
+                                        style="border-color: transparent; background-color: transparent;">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>Join a Class</h5>
+                    <img src="{% static '/images/Add.png' %}" data-bs-toggle="modal" data-bs-target="#join-class" title="Join class">
+                    <div class="modal fade" id="join-class" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: #3443CF;">Join
+                                        Class</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="join-class-form" action="{% url 'join_course' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" name="classcode" placeholder="Class Code" class="form-control" required
+                                            style="margin: 20px; border-radius: 30px; background-color: #BFDFF1; width: 90%; height: 80px; text-align: center; font-size: 40px; text-transform: uppercase;">
+                                    </form>
+                                    <hr style="margin-bottom: 10px; margin-right: 20px; margin-left: 20px;">
+                                    <div class="desc" style="text-align: left; font-size: 14px;">
+                                        <p style="margin-bottom: 0; text-indent: 20px;">
+                                            To sign in with a class code:
+                                        <ul style="margin-left: 20px;">
+                                            <li>Ask your teacher for the class code, then enter it here.</li>
+                                            <li>Use and authorized account</li>
+                                            <li>Use a class code with 5-7 letters or numbers, and no spaces or symbols
+                                            </li>
+                                        </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-bs-dismiss="modal" class="cancel-join-button"
+                                        style="border-color: transparent; background-color: transparent;">Cancel</button>
+                                    <div class="button">
+                                        <button id="newDiv" type="submit" form="join-class-form" class="join-button"
+                                            style="border-color: transparent; background-color: transparent;">Join</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let subMenu = document.getElementById("subMenu");
+        
+        function toggleMenu() {
+            subMenu.classList.toggle("open-menu");
+        }
+        
+        // Expanded
+        function expandDiv(id) {
+            var div = document.getElementById(id);
+            div.classList.toggle("expanded");
+            closeOtherDivs(id);
+        }
+        // Automatic close
+        function closeOtherDivs(clickedId) {
+            var divs = document.getElementsByClassName("expandable-content");
+            for (var i = 0; i < divs.length; i++)
+            {
+                var div = divs[ i ];
+                var divId = div.getAttribute("id");
+                if (divId !== clickedId && div.classList.contains("expanded"))
+                {
+                    div.classList.remove("expanded");
+                }
+            }
+        }
+
+        function createDiv() {
+            // Create a new div element
+            const newDiv = document.createElement("div");
+
+            // Set the div's text content
+            newDiv.textContent = "New Div";
+
+            // Append the div to the body element
+            document.body.appendChild(newDiv);
+        }
+    </script>
+{% endblock %}
+
+{% block profileModal %}
+<!-- modal for editing profile -->
+    <div class="modal fade" id="manual-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: #000;"><i
+                            class="fa-sharp fa-solid fa-file-invoice" style="margin-right: 10px;"></i>Edit Profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="left-side">
+                        <form class="title" id="edit-profile-form" action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-floating">
+                                <input type="text" name="username" class="form-control" placeholder="Username" id="floatingTextarea2" value="{{ user.username }}"
+                                    style="margin-bottom: 30px;">
+                                <label for="floatingTextarea2">Username</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ user.first_name }}"
+                                    id="floatingTextarea2" style="margin-bottom: 25px; max-height: 350px;">
+                                <label for="floatingTextarea2">First Name</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ user.last_name }}"
+                                    id="floatingTextarea2" style="margin-bottom: 25px; max-height: 350px;">
+                                <label for="floatingTextarea2">Last Name</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ user.email }}"
+                                    id="floatingTextarea3" style="margin-bottom: 25px; max-height: 350px;">
+                                <label for="floatingTextarea3">Email</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="file" name="profilePicture" class="form-control" placeholder="Profile Picture" value="{{ user.filename }}"
+                                    id="profilePicture" style="margin-bottom: 25px; max-height: 350px;">
+                                <label for="floatingTextarea3">Profile Picture</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="edit-profile-form" class="btn btn-primary"
+                        style="border-color: transparent; width: 70px;">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        // Expanded
+        function expandDiv(id) {
+            var div = document.getElementById(id);
+            div.classList.toggle("expanded");
+            closeOtherDivs(id);
+        }
+        // Automatic close
+        function closeOtherDivs(clickedId) {
+            var divs = document.getElementsByClassName("expandable-content");
+            for (var i = 0; i < divs.length; i++)
+            {
+                var div = divs[ i ];
+                var divId = div.getAttribute("id");
+                if (divId !== clickedId && div.classList.contains("expanded"))
+                {
+                    div.classList.remove("expanded");
+                }
+            }
+        }
+
+        function createDiv() {
+            // Create a new div element
+            const newDiv = document.createElement("div");
+
+            // Set the div's text content
+            newDiv.textContent = "New Div";
+
+            // Append the div to the body element
+            document.body.appendChild(newDiv);
+        }
+    </script>
+{% endblock %}

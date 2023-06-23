@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block script %}
+  <link href="{% static 'register/register.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <form id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+
+        {{ form.non_field_errors | safe }}
+        <input type="hidden" name="remember" value="true" />
+        <h2 id="reg">Register</h2>
+        <p>Kindly fill up this form to register</p>
+        <br>
+        <!-- <label for="name">First name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="name">Last name:</label>
+        <input type="text" id="name" name="name" required> -->
+
+        {{ form.username.errors | safe }}
+        <label for="username" class="sr-only">Username</label>
+        {% render_field form.username %}
+
+        {{ form.email.errors | safe }}
+        <label for="email" class="sr-only">Email</label>
+        {% render_field form.email %}
+
+        {{ form.password1.errors | safe }}
+        <label for="id_password1" class="sr-only">Password</label>
+        {% render_field form.password1 %}
+
+        {{ form.password2.errors | safe }}
+        <label for="password2" class="sr-only">Retry Password</label>
+        {% render_field form.password2 %}
+
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        
+        <input type="submit" value="Sign Up">
+        <!-- <button type="submit">Sign Up</button> -->
+        <br>
+        <p>Already have an account? <a href="{{ login_url }}">Sign in</a></p>
+    </form>
+  </div>
+{% endblock %}

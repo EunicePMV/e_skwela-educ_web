@@ -1,0 +1,878 @@
+/* stream course css */
+.course-navbar-temp {
+    display: none;
+    float: center;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    font-size: 1.25rem;
+    text-align: center;
+    background-color: #bfdff1;
+}
+
+.course-navbar-temp > a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.course-navbar-temp > a:hover {
+    color: #004aad;
+}
+
+.indiv-course-external {
+    display: block;
+    margin: auto;
+    min-height: 100vh;
+    max-width: 93.75rem;
+}
+
+.indiv-course-internal {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 3.5rem 2.188rem;
+}
+
+.nav-course-container {
+    border-radius: 1.875rem;
+    max-height: 42rem;
+    height: 42rem;
+    width: 20rem;
+    background-color: #BFDFF1;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-image-container {
+    padding: 1rem;
+}
+
+
+.main-course-img {
+    width: 200px;
+    height: 150px;
+    margin-bottom: 1.5rem;
+}
+
+.nav-pages-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-pages-container > a {
+    text-decoration: none;
+}
+
+.nav-pages-external-container {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-top-left-radius: 1.875rem;
+    border-bottom-left-radius: 1.875rem;
+    position: relative;
+}
+
+.nav-pages-internal-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+}
+
+.nav-pages-external-container:hover {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+/* when parent div is hover, child container should be the following */
+.nav-pages-external-container:hover *{
+    color: #0057FE;
+    font-weight: 600;
+}
+
+/* outside curve when pages are hover */
+.nav-pages-external-container:hover .nav-pages-internal-container::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 20px 20px 0 5px #ffffff;
+    pointer-events: none;
+}
+
+.nav-pages-external-container:hover .nav-pages-internal-container::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 20px -20px 0 5px #ffffff;
+    pointer-events: none;
+}
+
+.icon-nav-pages-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #454545;
+}
+
+.nav-pages-main-text {
+    width: 80%;
+    margin: auto;
+    padding-left: 1.5rem;
+    color: #454545;
+}
+
+.instruct-classcode-container {
+    background: linear-gradient(#FFFFFF, #BFDFF1);
+    border-radius: 15px;
+    border: 1px solid #BFDFF1;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    border-radius: 10px;
+    color: #525252;
+    max-width: 12rem;
+    width: 12rem;
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
+.instruct-classcode-container h1 {
+    font-size: 1.25rem;
+    margin-left: 1.5rem;
+    font-weight: 600;
+}
+
+.instruct-classcode-container h1:hover {
+    color: #0057FE;
+}
+
+.instruct-classcode-container h5 {
+    font-size: 0.75rem;
+}
+
+.course-body-container {
+    height: 100%;
+    width: calc(100% - 15rem);
+    margin-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-heading-container {
+    z-index: -1;
+}
+
+.course-main-title-heading {
+    color: #0057FE;
+    align-items: flex-start;
+}
+
+.course-section-title-heading {
+    color: #454545;
+}
+
+.course-post-container {
+    margin-top: 1.5rem;
+}
+
+.post-container-heading {
+    display: flex;
+    padding-left: 2.5rem;
+}
+
+.instruct-profile-picture {
+    height: 3.5rem;
+    width: 3.5em;
+    border-radius: 50%;
+}
+
+.main-text-instruct-name {
+    padding-left: 1.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    color: #0057FE;
+}
+
+.post-form-container:hover * {
+    transform: scale(1.01);
+    transition: ease-in-out 0.2s;
+}
+
+.post-form-course-container {
+    height: 16rem;
+    width: 100%;
+}
+
+.main-post-course-text {
+    margin-top: 1.25rem;
+    border: 1px solid #BFDFF1;
+    border-top-left-radius: 0.625rem;
+    border-top-right-radius: 0.625rem;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    resize: none;
+    height: 100%;
+    width: 100%;
+}
+
+.main-post-course-text:hover {
+    transform: scale(1.005);
+    transition: ease-in-out 0.3s;  
+}
+
+.post-course-main-button {
+    background-color: #BFDFF1;
+    color: #0057FE;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-bottom-left-radius: 0.625rem;
+    border-bottom-right-radius: 0.625rem;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    width: 100%;
+}
+
+.main-post-content {
+    min-height: 9.375rem;
+    width: 100%;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #BFDFF1;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    border-radius: 10px;
+}
+
+.main-post-content:hover {
+    transform: scale(1.005);
+    transition: ease-in-out 0.3s; 
+}
+
+.main-post-heading-container {
+    display: flex;
+}
+
+.main-task-content {
+    background-color: #BFDFF1;
+}
+
+.main-task-body-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.main-task-body-details {
+    font-size: 1rem;
+    padding-left: 1rem;
+}
+
+.main-post-heading-container {
+    display: flex;
+}
+
+.student-profile-picture-main-post {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.profile-details-post-container {
+    padding-left: 1.5rem;
+}
+
+.student-name-main-post-container {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0057FE;
+}
+
+.main-post-date {
+    font-family: "Inter", sans-serif;
+    font-size: 0.813rem;
+    font-weight: 500;
+    color: #877F7F;
+}
+
+.main-post-body {
+    padding: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.563rem;
+}
+
+.view-post-container {
+    color: #0057FE;
+    cursor: pointer;
+    text-align: right;
+    font-size: 1.25rem;
+}
+
+.view-post-container:hover * {
+    transform: scale(1.25);
+    transition: ease-in-out 0.3s;  
+    color: #454545;
+}
+
+@media (max-width: 780px) {
+    .course-navbar-temp {
+        display: block;
+    }
+
+    .nav-course-container {
+        display: none;
+    }
+
+    .course-body-container {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* ============================= */
+/* classwork course css */
+
+.btn.btn-primary:hover {
+    background-color: #5fb9ff;
+}
+
+.assquizheader, .materialheader {
+    padding-top: 10px; 
+    padding-bottom: 0; 
+    color: #3443CF;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.expand-content {
+    align-items: center;
+    justify-content: center;
+}
+
+.expandable-content {
+    background-color: #fff;
+    height: 45px;
+    margin: 10px;
+    cursor: pointer;
+    color: #474747;
+    border-radius: 12px;
+    padding-top: 12px;
+    padding-left: 10px;
+}
+
+.expandable-content:hover {
+    box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.1);
+    transition: 0.2s ease-in-out;
+}
+
+.expandable-content p {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.expandable-content i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.expanded {
+    height: auto;
+    padding-bottom: 5px;
+    cursor: pointer;
+    background-color: #BFDFF1;
+    transition: 0.3s ease-in-out;
+}
+
+.hidden-text {
+    display: none;
+}
+
+.hidden-text p {
+    color: #000;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.hidden-text ul {
+    padding-right: 10px;
+}
+
+.expanded .hidden-text {
+    display: block;
+}
+
+.ass-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.ass-footer button {
+    margin: 0;
+    position: relative;
+}
+
+.btn.btn.btn-primary:hover {
+    box-shadow: 0 3px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal */
+.modal-header i {
+    margin-right: 10px;
+    font-size: 23px;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-side {
+    /* overflow-y: auto; */
+    margin-right: 30px;
+    width: 900px;
+    max-height: 500px;
+    border-radius: 10px;
+    background-color: #BFDFF1;
+}
+
+.title {
+    padding: 20px;
+}
+
+
+.right-side {
+    margin-left: 30px;
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+    background-color: #BFDFF1;
+}
+
+textarea {
+    resize: none;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+
+    .logo {
+        width: 130px;
+        height: 50px;
+    }
+
+    .navigation {
+        display: none;
+        /* width: 220px;
+        left: 25px; */
+    }
+
+    .course-navbar-temp {
+        display: block;
+    }
+
+    .container {
+        margin-left: 0;
+        padding: 10px;
+        width: 100%;
+        justify-content: center !important;
+    }
+
+    .navigation img {
+        width: 160px;
+    }
+
+    .hidden-text p {
+        font-size: 11px;
+    }
+
+    .hidden-text ul {
+        font-size: 11px;
+    }
+
+    .expandable-content p {
+        font-size: 11.2px;
+    }
+
+    .right-side {
+        width: 900px;
+    }
+
+    .Due {
+        visibility: hidden;
+    }
+}
+
+/* ============================= */
+/* people course css */
+
+:root {
+    --main-bg-color: #bfdff1;
+    --main-font-color: #3443cf;
+    --border-color: #1e1e1e;
+    --button-disabled: #7d9dba;
+    --table-border: 1vw;
+}
+
+html {
+    transition: all 200ms ease-in 0ms;
+    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+}
+html, body{
+    margin: 0px;
+}
+
+header {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--main-bg-color);
+    min-height: 5rem;
+}
+
+footer {
+    position: relative;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--main-bg-color);
+    min-height: 15rem;
+}
+
+.instructor{
+    display:flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    padding: 16px 0;
+}
+
+#i-profile{
+    aspect-ratio: 1/1;
+    width: 7.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 19.6px;
+    background-color: var(--main-bg-color);
+}
+#i-profile img{
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+#i-name{
+    font-size: large;
+    text-align: center;
+    font-weight: bolder;
+}
+
+#selectAll{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 16px;
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+    background-color: var(--main-font-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+}
+#selectAll input[type=checkbox]{
+    transform: scale(1.25);
+    margin-right: 16px;
+}
+#selection{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+#selectButton, #sorter{
+    display: flex;
+    color: var(--main-font-color);
+    border-radius: 100px;
+    border: none;
+    aspect-ratio: 1/1;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.2rem !important;
+    background-color:var(--main-bg-color);
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+#selectButton[disabled] i, button:disabled i{
+    color: var(--button-disabled);
+    cursor: default;
+}
+
+#tableHandler{
+    display: block;
+    width: 100%;
+    margin:auto;
+    min-height: 75vh;
+}
+#students{
+    display: block;
+    width: 100%;    
+}
+#students table{
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+#students th{
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font-size: 1.5rem;
+    height: 2.5rem;
+}
+#students tr:first-child{
+    height: 4rem;
+    border-bottom-width: 2px;
+    margin-bottom: 1rem;
+}
+#students tr{
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    border-bottom: 1px var(--button-disabled) solid;
+    width: 100%;
+}
+#students th:first-child {
+    display: flex;
+    width: 3.5rem;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox:first-child {
+    display: flex;
+    width: 3.5rem;
+    align-items: center;
+    justify-content: center;
+}
+#sort{
+    align-self: center;
+}
+.info{
+    display:flex;
+    flex-direction: column;
+}
+.name{
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: bolder;
+}
+.email{
+    font-size: .75rem;
+}
+
+@media screen and (max-width: 600px){
+    #tableHandler{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    #tableHandler{
+        width: 96%;
+    }
+}
+
+@media screen and (max-width: 350px){
+    #students{
+        height:fit-content;
+        max-height: fit-content;
+        min-height: fit-content;
+        width: 96%;
+        overflow-x: scroll;
+    }
+}
+
+/* ============================= */
+/* mark course css */
+
+* {
+    margin: 0;
+}
+
+.marks-table-container {
+    margin: auto;
+    width: 100%;
+    max-width: 78.5rem;
+    min-height: 30.563rem;
+    overflow-x: auto;
+    padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+    height: 100%;
+}
+
+.marks-main-table td {
+    border: 2px solid #050F20;
+    margin: 0;
+}
+
+/* column and row should be extended but will not stretch the table */
+
+.marks-main-table {
+    display: table;
+    border-spacing: 0;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.marks-main-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.marks-main-table td {
+    padding: 0.5rem 0.625rem;
+}
+
+.marks-main-table td:first-child {
+    padding: 0.5rem 0.625rem;
+    width: 10%;
+}
+
+.marks-main-table td:not(:first-child) {
+    width: 6%;
+    white-space: nowrap;
+}
+
+.marks-main-table td:last-child {
+    width: auto;
+}
+
+.date-row {
+    height: 1.875rem;
+}
+
+.date-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 0.938rem;
+    color: #000000;
+}
+
+.act-date {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 0.938rem;
+    color: #000000;
+}
+
+#heading-row {
+    width: 100%;
+    height: 3rem;
+    background-color: #d9d9d9;
+}
+
+.marks-main-heading {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-align: center;
+    line-height: 0.938rem;
+    color: #000000;
+    display: inline-block;
+}
+
+.student-name {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 0.938rem;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.student-context-row {
+    height: 3.5rem;
+}
+
+/* .student-main-score {
+    display: flex;
+    justify-content: center;
+} */
+
+.attach-file-link {
+    font-size: 0.75rem;
+    color: #009900;
+    text-align: center;
+}
+
+.student-main-score > input {
+    border: none !important;
+    border-bottom: 2px solid #cccccc !important;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.student-main-score > input:focus {
+    outline: none;
+}
+
+.score-input {
+    color: #009900;
+}
+
+#row-score-container, #row-class-ave {
+    background-color: #d9d9d9;
+    color: #000000;
+    font-weight: bold;
+}
+
+.act-score-container {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.938rem;
+    text-align: center;
+}
+
+.act-score, .ave-score {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    line-height: 0.938rem;
+    text-align: center;
+}
+
+.class-ave-container {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.75rem;
+    line-height: 0.938rem;
+    text-align: center;
+}

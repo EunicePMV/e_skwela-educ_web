@@ -1,0 +1,87 @@
+<!-- extends the layout of the course student stream html to get 
+    the side navbar and make layout consistent -->
+
+{% extends 'main/S_course/S_course_stream.html' %}
+
+{% load static %}
+
+{% block student_stream_course %}
+    <div class="people-external-container">
+        <div class="people-internal-container">
+            <div class="people-instruct-container">
+                <h3>
+                    Instructor
+                </h3>
+            </div>
+            <hr />
+            <div class="people-profile-instruct-container">
+                {% if instructor.profile_picture %}
+                    <img src="{{ instructor.profile_picture.url }}" alt="Instructor Profile Picture" class="people-instruct-main-img">
+                {% else %}
+                    <img src="{% static 'images/user-person.png' %}" alt="Instructor Profile Picture" class="people-instruct-main-img">
+                {% endif %}
+                <span class="people-instruct-name-main-container">
+                    {% if instructor.first_name and instructor.last_name %}
+                        {{ instructor.first_name }} {{ instructor.last_name }}
+                    {% else %}
+                        {{ instructor.username }}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="people-student-container">
+                <div class="people-student-title-container">
+                    <h3>
+                        Students
+                    </h3>
+                </div>
+                <hr />
+                <table>
+                    <tbody>
+                        {% for student in students %}
+                            <tr class="people-student-row-container">
+                                <td>
+                                    {% if student.profile_picture %}
+                                        <img src="{{ student.profile_picture.url }}" alt="Student Profile Picture" class="people-student-main-img">
+                                    {% else %}
+                                        <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="people-student-main-img">
+                                    {% endif %}
+                                </td>
+                                <td class="people-student-name-main-context">
+                                    {% if student.first_name and student.last_name %}
+                                        {{ student.first_name }} {{ student.last_name }}
+                                    {% else %}
+                                        {{ student.username }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <!-- <tr class="people-student-row-container">
+                            <td>
+                                <img src="{% static 'images/prsn2.png' %}" alt="Instructor Profile Picture" class="people-student-main-img">
+                            </td>
+                            <td class="people-student-name-main-context">
+                                Juan Dela Cruz
+                            </td>
+                        </tr>
+                        <tr class="people-student-row-container">
+                            <td>
+                                <img src="{% static 'images/prsn2.png' %}" alt="Instructor Profile Picture" class="people-student-main-img">
+                            </td>
+                            <td class="people-student-name-main-context">
+                                Juan Dela Cruz
+                            </td>
+                        </tr>
+                        <tr class="people-student-row-container">
+                            <td>
+                                <img src="{% static 'images/prsn2.png' %}" alt="Instructor Profile Picture" class="people-student-main-img">
+                            </td>
+                            <td class="people-student-name-main-context">
+                                Juan Dela Cruz
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

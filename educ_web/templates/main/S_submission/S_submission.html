@@ -1,0 +1,95 @@
+{%  extends 'main/S_home/S_home.html' %}
+
+{% load static %}
+
+{% block script %}
+    <link href="{% static 'S_submission/S_submission.css' %}" rel="stylesheet">
+    <script src="{% static 'S_submission/S_submission.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    Submit
+{% endblock %}
+
+{% block body %}
+    <div class="course-navbar-temp">
+        <a href="{% url 'student_stream' course_id=course.id %}">Stream</a>
+        <a href="{% url 'student_classwork' course_id=course.id %}">Classwork</a>
+        <a href="{% url 'student_people' course_id=course.id %}">People</a>
+    </div>
+    <main>
+        <div class="body-internal-container">
+            <div class="act-logo-container">
+                <div class="act-logo">
+                    <img src="{% static '/images/File Doc.png' %}" id="file-doc-logo" alt="Dark File Document Logo" width="35" height="35">
+                </div>
+            </div>
+            <div class="main-instruct-container">
+                <div class="act-name-context" id="act-name-context">
+                    {{ task.title | upper }}
+                    {% if user == course.instructor %}
+                        <img src="{% static '/images/Subtract.png' %}" id="edit-doc-logo" alt="Dark Edit File Document Logo" width="25" height="25">
+                    {% endif %}
+                </div>
+                <div class="instruct-details-container">
+                    <span class="instruct-title-context">
+                        Instructions
+                    </span>
+                    <div class="instruct-details-context">
+                        {{ task.instruction }}
+                    </div>
+                    <div class="submission-bin-container-responsive">
+                        <div class="due-pts-container">
+                            <div class="due-date-time-context">
+                                {{ task.due_date_time }}
+                            </div>
+                            <div class="pts-context">
+                                {{ task.score }}
+                            </div>
+                        </div>
+                        <form id="submit-attach-file" action="{% url 'save_attachment' course_id=course.id task_id=task.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <label for="upload-file" class="upload-file-container">
+                                Upload file
+                                <input type="file" name="attach-file" id="upload-file" multiple />
+                            </label>
+                            <input class="submit-file-container" type="submit" form="submit-attach-file" placeholder="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="submission-bin-container" id="submission-bin-container">
+                <div class="due-pts-container">
+                    <div class="due-date-time-context">
+                        {{ task.due_date_time }}
+                    </div>
+                    <div class="pts-context">
+                        {{ task.score }}
+                    </div>
+                </div>
+                {% if submission %}
+                    <div class="uploaded-file-container">
+                        <div class="upload-file-logo">
+                        </div>
+                        <span class="file-name-context">
+                            {{ submission.filename }}
+                        </span>
+                    </div>
+                    <form id="unsubmit-attach-file" action="{% url 'del_attachment' course_id=course.id task_id=task.id %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input class="unsubmit-container" type="submit" form="unsubmit-attach-file" value="Unsubmit">
+                    </form>
+                {% else %}
+                    <form id="submit-attach-file" action="{% url 'save_attachment' course_id=course.id task_id=task.id %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="upload-file" class="upload-file-container" id="upload-file-container">
+                            Upload file
+                            <input type="file" name="attach-file" id="upload-file-container" multiple />
+                        </label>
+                        <input class="submit-file-container" type="submit" form="submit-attach-file" value="Submit">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

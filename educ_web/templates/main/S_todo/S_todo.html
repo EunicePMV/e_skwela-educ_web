@@ -1,0 +1,57 @@
+{% extends 'main/S_home/S_home.html' %}
+
+{% load static %}
+
+{% block script %}
+	<link href="{% static 'S_todo/S_todo.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+	To Do
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="header">
+			<h1>Classroom To-Do List</h1>
+			<p>Assignments, missing work, and done work</p>
+		</div>
+
+		<div class="filters">
+			<a href="{% url 'todo' %}"><button class="active">Assigned</button></a>
+		</div>
+
+		<label for="all-task-select" class="form-label"><strong>Assigned Tasks</strong></label>
+		<select id="all-task-select" >
+			{% if all_task %}
+				{% for task in all_task %}
+					<option>{{ task | title }}</option>
+				{% endfor %}
+			{% else %}
+				<option selected>No due date</option>
+			{% endif %}
+		</select>
+
+		<label for="today-task-select" class="form-label"><strong>Today Tasks</strong></label>
+		<select id="today-task-select">
+			{% if task_today %}
+				{% for task in task_today %}
+					<option>{{ task | title }}</option>
+				{% endfor %}
+			{% else %}
+				<option selected>No task for this week</option>
+			{% endif %}
+		</select>
+
+		<label for="week-task-select" class="form-label"><strong>Week Tasks</strong></label>
+		<select id="week-task-select">
+			{% if task_week %}
+				{% for task in task_week %}
+					<option>{{ task | title }}</option>
+				{% endfor %}
+			{% else %}
+				<option selected>No task for this week</option>
+			{% endif %}
+		</select>
+	</div>
+{% endblock %}

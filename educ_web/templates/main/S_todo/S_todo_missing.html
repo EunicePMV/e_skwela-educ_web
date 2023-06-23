@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block script %}
+	<link href="{% static 'S_todo/S_todo.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+	To Do
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="header">
+			<h1>Classroom To-Do List</h1>
+			<p>Assignments, missing work, and done work</p>
+		</div>
+
+		<div class="filters">
+			<a href="{% url 'todo' %}"><button>Assigned</button></a>
+			<a href="{% url 'todo_missing' %}"><button class="active">Missing</button></a>
+			<a href="{% url 'todo_done' %}"><button>Done</button></a>
+		</div>
+		<select id= "class">
+			<option selected>--Choose a Class--</option>
+			<option value="math">Math</option>
+			<option value="science">Science</option>
+			<option value="english">English</option>
+			<option value="history">History</option>
+		</select>
+
+		<select>
+			<option selected>No due date</option>
+		</select>
+
+		<select>
+			<option selected>This week</option>
+		</select>
+
+		<select>
+			<option selected>Next week</option>
+		</select>
+
+		<select>
+			<option selected>Later</option>
+		</select>
+
+
+	</div>
+{% endblock %}

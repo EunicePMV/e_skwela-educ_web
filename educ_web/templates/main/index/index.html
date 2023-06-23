@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block script %}
+    <link href="{% static 'index/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    E-skwela
+{% endblock %}
+
+{% block body %}
+    <div class="index-external-container">
+        <div class="side">
+            <img src="{% static '/images/logo.png' %}" alt="logo" class="index-logo-img">
+            <h2 class="side-headings">ENJOY</h2>
+            <p class="side-small">Appreciate every bit</p><br>
+            <h2 class="side-headings">LEARN</h2>
+            <p class="side-small">Gain and acquire knowledge</p>
+            <img src="{% static '/images/girl.png' %}" alt="girl">
+        </div>
+    </div>
+{% endblock %}

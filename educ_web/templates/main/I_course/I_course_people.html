@@ -1,0 +1,77 @@
+<!-- extends the layout of the course student stream html to get 
+    the side navbar and make layout consistent -->
+    
+
+{% extends 'main/I_course/I_course_stream.html' %}
+
+{% load static %}
+
+{% block indiv_js %}
+    <script src="{% static 'I_course/I_course_people.js' %}" defer></script>
+{% endblock %}
+
+{% block instruct_stream_course %}
+    <main>
+        <div class="instructor">
+            <div id="i-profile">
+                {% if course.instructor.profile_picture %}
+                    <img src="{{ course.instructor.profile_picture.url }}">
+                {% else %}
+                    <img src="https://yt3.ggpht.com/7qgVlNH_i-M7g3rwVfGHo5B3j-llO4sxKDdh4IWoHkwfO8JMhd2EoW6gcge_R_-t-ldUWMxJZQ=s88-c-k-c0x00ffffff-no-rj">
+                {% endif %}
+            </div>
+            <span id="i-name">
+                {% if course.instructor.first_name and course.instructor.last_name %}
+                    {{ course.instructor.last_name }}, {{ course.instructor.first_name }}
+                {% else %}
+                    {{ course.instructor.username }}
+                {% endif %}
+            </span>
+        </div>
+        <hr>
+        <section id="tableHandler">
+            <div id="selectAll">
+                <div id="selection">
+                    <input id="selectCheck" type="checkbox">
+                    <span id="select">Select all</span>
+                </div>
+                <button id="selectButton" type="submit" form="remove-student">
+                    <i class="fa-solid fa-trash fa-sm"></i>
+                </button>
+            </div>
+            <div id="students">
+                <form id="remove-student" action="{% url 'remove_students' course_id=course.id %}" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <th id="sort">
+                                <span id="sorter">
+                                    <i class="fa-solid fa-sort fa-lg"></i>
+                                </span>
+                            </th>
+                            <th>Name</th>
+                        </tr>
+                        {% for student in course.students.all %}
+                            <tr>
+                                <td class="checkbox"><input class="tickboxes" type="checkbox" name="students" value="{{ student.id }}"></td>
+                                <td>
+                                    <div class="info">
+                                        <span class="name">
+                                            {% if student.first_name and student.last_name %}
+                                                {{ student.last_name }} {{ student.first_name }}
+                                            {% else %}
+                                                {{ student.username }}
+                                            {% endif %}
+                                        </span>
+                                        <span class="email">{{ student.email }}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        
+                    </table>
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

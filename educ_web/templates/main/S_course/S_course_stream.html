@@ -1,0 +1,202 @@
+{% extends 'main/S_home/S_home.html' %}
+
+{% load static %}
+
+{% block script %}
+    <link href="{% static 'S_course/S_course_stream.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    {{ course.name | upper }}
+{% endblock %}
+
+{% block body %}
+    <div class="course-navbar-temp">
+        <a href="{% url 'student_stream' course_id=course.id %}">Stream</a>
+        <a href="{% url 'student_classwork' course_id=course.id %}">Classwork</a>
+        <a href="{% url 'student_people' course_id=course.id %}">People</a>
+    </div>
+    <div class="indiv-course-external">
+        <div class="indiv-course-internal">
+            <div class="nav-course-container">
+                <div class="course-image-container">
+                    {% if course.banner %}
+                        <img src="{{ course.banner.url }}" alt="Chosen Course Picture" class="main-course-img">
+                    {% else %}
+                        <img src="{% static 'images/d6.png' %}" alt="Chosen Course Picture" class="main-course-img">
+                    {% endif %}
+                </div>
+                <div class="nav-pages-container">
+                    <a href="{% url 'student_stream' course_id=course.id %}">
+                        <div class="nav-pages-external-container">
+                            <div class="nav-pages-internal-container">
+                                <span class="icon-nav-pages-container">
+                                    <ion-icon name="filter-outline"></ion-icon>
+                                </span>
+                                <div class="nav-pages-main-text">
+                                    Stream
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'student_classwork' course_id=course.id %}">
+                        <div class="nav-pages-external-container">
+                            <div class="nav-pages-internal-container">
+                                <span class="icon-nav-pages-container">
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </span>
+                                <div class="nav-pages-main-text">
+                                    Classwork
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'student_people' course_id=course.id %}">
+                        <div class="nav-pages-external-container">
+                            <div class="nav-pages-internal-container">
+                                <span class="icon-nav-pages-container">
+                                    <ion-icon name="people-outline"></ion-icon>
+                                </span>
+                                <div class="nav-pages-main-text">
+                                    People
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="course-body-container">
+                <div class="course-heading-container">
+                    <span class="course-main-title-heading">
+                        {% if course.code %}
+                            <h1>
+                                {{ course.code | upper }} : {{ course.name | upper }}
+                            </h1>
+                        {% else %}
+                            <h1>
+                                {{ course.name | upper }}
+                            </h1>
+                        {% endif %}
+                    </span>
+                    <br/>
+                    <span class="course-section-title-heading">
+                        <h3>
+                            {{ course.section | upper }}
+                        </h3>
+                    </span>
+                    <hr>
+                </div>
+                {% block student_stream_course %}
+                    <div class="course-student-post-container">
+                        <div class="post-container-heading">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                            {% else %}
+                                <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                            {% endif %}
+                            {% if user.first_name and user.last_name %}
+                                <span class="main-text-student-name">
+                                    {{ user.first_name }} {{ user.last_name }}
+                                </span>
+                            {% else %}
+                                <span class="main-text-student-name">
+                                    {{ user.username }}
+                                </span>
+                            {% endif %}
+                        </div>
+                        <div class="student-post-form-container">
+                            <form id="post-content-form" class="post-form-course-container" action="{% url 'post_content' course_id=course.id %}" method="POST">
+                                {% csrf_token %}
+                                <textarea name="course-post-content" class="main-post-course-text"></textarea>
+                            </form>
+                            <button type="submit" form="post-content-form" class="post-course-main-button">Post</button>
+                        </div>
+                    </div>
+                    <div class="main-posted-container">
+                        {% if all_post %}
+                            {% for post in all_post %}
+                                {% if post.creator %}
+                                    <div class="main-post-content">
+                                        <div class="main-post-heading-container">
+                                            {% if post.creator.profile_picture %}
+                                                <img src="{{ post.creator.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% else %}
+                                                <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% endif %}
+                                            <div class="profile-details-post-container">
+                                                <span class="student-name-main-post-container">
+                                                    {% if post.creator.first_name and post.creator.last_name %}
+                                                        {{ post.creator.first_name }} {{ post.creator.last_name }}
+                                                    {% else %}
+                                                        {{ post.creator.username }}
+                                                    {% endif %}
+                                                </span>
+                                                <br />
+                                                <span class="main-post-date">
+                                                    {{ post.date_time }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="main-post-body">
+                                            {{ post.content }}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="main-post-content main-task-content">
+                                        <div class="main-post-heading-container">
+                                            {% if course.instructor.profile_picture %}
+                                                <img src="{{ course.instructor.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% else %}
+                                                <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% endif %}
+                                            <div class="profile-details-post-container">
+                                                <span class="student-name-main-post-container">
+                                                    {% if course.instructor.first_name and course.instructor.last_name %}
+                                                        {{ course.instructor.first_name }} {{ course.instructor.last_name }}
+                                                    {% else %}
+                                                        {{ course.instructor.username }}
+                                                    {% endif %}
+                                                </span>
+                                                <br />
+                                                <span class="main-post-date">
+                                                    {{ post.date_time }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="main-post-body">
+                                            <div class="main-task-body-title">
+                                                {{ post.type | title }}
+                                            </div>
+                                            <div class="main-task-body-details">
+                                                {% if post.type == 'MATERIAL' %}
+                                                    {{ post.instruction }}
+                                                {% else %}
+                                                    <strong>Deadline: {{ post.due_date_time }}</strong>
+                                                    <br />
+                                                    {{ post.instruction }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if post.type != 'MATERIAL' %}
+                                            <div class="view-post-container">
+                                                <a href="{% url 'submission' course_id=course.id task_id=post.id %}">
+                                                    <ion-icon name="eye-outline" class=""></ion-icon>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-announcement">
+                                <h4>
+                                    No announcement yet...
+                                </h4>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

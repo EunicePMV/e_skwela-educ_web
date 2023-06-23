@@ -1,0 +1,337 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.full-width {
+    width: 100%;
+}
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: "Inter";
+}
+
+nav {
+    background: white;
+    height: 80px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.2);
+    
+    
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select {
+    font-size: 16px;
+    font-family: "Inter";
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    display: block;
+    width: 30%;
+    position: absolute;
+    bottom: 0;
+    
+}
+
+select option {
+    font-size: 16px;
+    font-family: "Inter";
+
+}
+
+.return-button {
+    float: right;
+    margin-top: 40px;
+    margin-right: 10px;
+    background-color: #4285f4;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 5%;
+}
+
+.body
+{
+    display: flex;
+
+}
+.part1
+{
+    background-color: rgb(236, 241, 243);
+    height: 89.3vh;
+    width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    
+    
+}
+.part1 img
+{
+    height: 23%;
+    display: block;
+     margin: 0 auto;
+    margin-top: 20%;
+    
+}
+p {
+
+    font-size: 18px;
+    font-family: "Inter";
+    justify-content: center;
+    text-align: center;
+    margin-top: 2%;
+  
+}
+
+.part2
+{
+    background-color: red;
+    height: 89.3vh;
+    width: 58px;
+    justify-content: center;
+    text-align: center;
+    background: white; 
+    border-style: groove;
+    
+}
+.part2 img 
+{
+    height: 40px;
+    width: 40px;
+    margin-top: 20px;
+    padding: 3px;
+}
+.part2 img:hover
+{
+    background-color: #dee2e9;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px;
+
+
+}
+
+
+.down img
+{
+    height: 20px;
+    width: 18px;
+    margin-top: 500px;
+    cursor: pointer;
+}
+
+.down img:hover
+{
+    background-color: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+
+.part3
+{
+
+    height: 89.3vh;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+
+}
+.files{
+    height: 25%;
+    font-size: 18px;
+    font-family: "Inter";
+    margin-top: 8%;
+    margin-left: 8%;
+
+}
+
+.files p {
+
+    font-size: 18px;
+    font-family: "Inter";
+    text-align: justify;
+    margin-top: 90px;
+
+}
+.separator {
+    border-bottom: 2px groove rgb(236, 229, 229);
+    width: 108%;
+}
+.mark {
+    height: 20%;
+    font-size: 18px;
+    font-family: "Inter";
+    margin-top: 8%;
+    margin-left: 8%;
+  }
+  .input-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .input-container input {
+    
+    padding-right: 42px; /* Adjust this value to accommodate the "/100" text */
+    width: 170px; /* Adjust the width as needed */
+    
+    
+  
+  }
+  
+  .input-container .fixed-value {
+    position: absolute;
+    top: 0;
+    right: 10px; /* Adjust the positioning as needed */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    pointer-events: none; /* Ensure the text doesn't interfere with input interaction */
+  }
+
+  .warning {
+    position: absolute;
+    color: red;
+    font-size: 16px;
+    text-align: center;
+
+  }
+
+  .custom-dropdown {
+    float: right;
+    display: block;
+    cursor: pointer;
+    margin-top: 33px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f0e9e9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-width: 160px;
+    padding: 10px;
+    z-index: 1;
+    margin-top: 20px;
+    right: 20px;
+  }
+
+  .custom-dropdown.active .dropdown-content {
+    display: block;
+  }
+
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+  
+  .popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 20%;
+  }
+
+    .popup-content h4{
+
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 15px;
+
+    }
+
+  .popup-content button {
+    float: right;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 8px;
+    border: none;
+    width: 30%;
+    margin-top: 40px;
+    margin-left: 2px;
+
+
+}
+.popup-content button:hover {
+
+    float: right;
+    background-color: #dfdfdf;
+    border-radius: 3px;
+    cursor: pointer;
+
+}
+
+
+
+input  {
+    width: 80%;
+    padding: 20px 20px;
+    margin: 15px 0;
+    box-sizing: border-box;
+    border: 2px groove white;
+    border-radius: 3px;
+
+    
+}
+.text{
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 3%;
+    height: 50%;
+    padding: 17px 20px;
+    border: 2px groove white;
+    border-radius: 3px;
+    font-size: 16px;
+    
+
+}
+
+.comment
+{
+    font-size: 18px;
+    font-family: "Inter";
+    margin-top: 8%;
+    margin-left: 8%;
+    
+}
+.post-button {
+    float: right;
+    background-color: #4285f4;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    width:  35%;
+}
+

@@ -1,0 +1,168 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block script %}
+    <link href="{% static 'I_indiv_file/I_indiv_file_comment.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    Subject
+{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for submission in submissions %}
+            <li>
+                <object data="{{ submission.attached_file.url }}" type="application/pdf" width="100%" height="100%">
+                    <p>Alternative text - include a link <a href="{{ submission.attached_file.url }}">to the PDF!</a></p>
+                </object>
+                <a href="{{ submission.attached_file.url }}">{{ submission.filename }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% comment %}
+        <div class="instruct-indiv-file-comment-container">
+            <div>
+                <nav>
+                    <div>
+                        <select id="student-dropdown">
+                            <option value="" selected>-- Select a student --</option>
+                            {% for student in students %}
+                                {% if student.first_name and student.last_name %}
+                                    <option value="">{{ student.first_name }} {{ student.last_name }}</option>
+                                {% else %}
+                                    <option value="">{{ student.username }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="return-button">Return</button>
+                </nav>
+            </div>
+
+            <div class="body">
+                <div class="part1">
+                    <img src="{% static 'images/sample.png' %}" alt="">
+                    <p>No files attached</p>
+
+                </div>
+
+                <div class="part2" id="part2-show"> 
+                    <a href="file.html"><img src="{% static 'images/sample2.png' %}" alt="button" title="Grading"></a>
+                    <a href="{% url 'indiv_file_comment' course_id=course.id %}"><img src="{% static 'images/sample3.png' %}" alt="button" title="Comment bank"></a>
+
+
+                    <div class="down">
+                    
+                        <img src="{% static 'images/sample4.png' %}" alt="button" id="show-button"title="show side panel">
+                        <img src="{% static 'images/sample5.png' %}" alt="button" id="hide-button"title="hide side panel">
+
+                    </div>
+                </div>
+
+                <div class="part3">
+                    
+                    <div class="commentBank"><h4>Comment Bank</h4>
+
+                        <div id="searchContainer">
+                    <div 
+                    id="searchButton" class="search-icon" onclick="toggleSearchBar()">
+                    <img src="{% static 'images/search-icon.png' %}" alt="Search Icon">
+                    </div>
+                    <input type="text" id="searchBar" class="search-bar" placeholder="Search...">
+                </div>
+                        <button onclick="showPopup()" class="add-to-bank-button">Add to bank</button>
+                        <!-- Popup HTML -->
+                        <div class="overlay" id="overlay"></div>
+
+                        <div class="popup" id="popup">
+                            <h2>Add comment</h2>
+                        <textarea id="commentText" placeholder="Add multiple comments by starting a new line..."></textarea>
+                        <br>
+                        <button class="cancel-button" onclick="cancel()">Cancel</button>
+                        <button class="add-button" onclick="addComment()">Add</button>
+                        </div>
+                    </div>
+                    
+                    <h3>Your comment bank is empty</h3>
+                    <p>Add comments here to quickly reuse across students and assignments</p>
+                </div>     
+            </div> 
+        </div>
+
+        <script>
+            const showButton = document.getElementById('show-button');
+            const hideButton = document.getElementById('hide-button');
+            const part1Div = document.querySelector('.part1');
+            const part2Div = document.querySelector('.part2');
+            const part3Div = document.querySelector('.part3');
+        
+            hideButton.addEventListener('click', function() {
+                part3Div.classList.add('hidden');
+                part1Div.classList.add('full-width');
+                showButton.classList.remove('hidden');
+                hideButton.classList.add('hidden');
+    
+    
+            });
+        
+            showButton.addEventListener('click', function() {
+                part3Div.classList.remove('hidden');
+                part1Div.classList.remove('full-width');
+                showButton.classList.add('hidden');
+                hideButton.classList.remove('hidden');
+    
+        
+            });
+        </script>
+
+        <style>
+            .full-width {
+                width: 100%;
+            }
+            .hidden {
+                display: none;
+            }
+        </style>
+
+        <script>
+            function showPopup() {
+            // Show the overlay and popup
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+            }
+
+            function hidePopup() {
+            // Hide the overlay and popup
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+            }
+
+            function cancel() {
+            // Clear the textarea and hide the popup
+            document.getElementById("commentText").value = "";
+            hidePopup();
+            }
+
+            function addComment() {
+            // Get the comment text from the textarea
+            var comment = document.getElementById("commentText").value;
+            // Do something with the comment (e.g., send it to the server)
+            console.log("Comment:", comment);
+            // Clear the textarea and hide the popup
+            document.getElementById("commentText").value = "";
+            hidePopup();
+            }
+        </script>
+
+        <script>
+        function toggleSearchBar() {
+        var searchBar = document.getElementById("searchBar");
+        searchBar.classList.toggle("active");
+        }
+        </script>
+
+    {% endcomment %}
+{% endblock %}

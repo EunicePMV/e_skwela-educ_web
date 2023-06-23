@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>subject</title>
+    <link rel="stylesheet" type="text/css" href="file.css">
+
+</head>
+<body>
+   
+    <div>
+        <nav>
+            <div>
+                <select id="student-dropdown">
+                    <option value="">-- Select a student --</option>
+                </select>
+            </div>
+            <button class="return-button">Return</button>
+        </nav>
+    </div>
+
+    <div class="body">
+        <div class="part1">
+            <img src="sample.png" alt="">
+            <p>No files attached</p>
+    
+        </div>
+
+        <div class="part2" id="part2-show"> 
+            <a href="file.html"><img src="sample2.png" alt="button" title="Grading"></a>
+            <a href="comment.html"><img src="sample3.png" alt="button" title="Comment bank"></a>
+ 
+
+            <div class="down">
+               
+                <img src="sample4.png" alt="button" id="show-button"title="show side panel">
+                <img src="sample5.png" alt="button" id="hide-button"title="hide side panel">
+
+            </div>
+        </div>
+
+        <div class="part3">
+            <div class="files"><h4>Files</h4>
+              <p>No files attached</p>            
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="mark"><h4>Mark</h4>
+
+              <div class="input-container">
+                <input type="text" id="marks-input">
+                <div class="fixed-value">/100</div>
+                <div class="warning" id="warning-message"></div>
+              </div>
+            
+                  
+                  <div class="custom-dropdown">
+                    &#10247;
+                    <div class="dropdown-content">
+                      Change total points
+                    </div>
+                  </div>
+                  
+                  <div class="popup-container">
+                    <div class="popup-content">
+                        <h4>Change total points</h4>
+                      <input type="number" id="new-value" value="100">
+                      <button onclick="updateFixedValue()"><p>Changes</p></button>
+                      <button onclick="closePopup()"><p>Cancel</p></button>
+                      
+                    </div>
+                  </div>
+                  
+                  
+
+            </div>
+
+            <div class="separator"></div>
+            <div class="comment">
+                <h4>Private comments</h4>
+                <form>
+                    <input type="text" placeholder="Add private comment..." class = "text" required>
+                </form>
+                <button class="post-button">Post</button>
+            </div>  
+            
+        </div>
+    </div>
+
+
+
+
+    <script>
+      const showButton = document.getElementById('show-button');
+      const hideButton = document.getElementById('hide-button');
+      const part1Div = document.querySelector('.part1');
+      const part2Div = document.querySelector('.part2');
+      const part3Div = document.querySelector('.part3');
+  
+      hideButton.addEventListener('click', function() {
+          part3Div.classList.add('hidden');
+          part1Div.classList.add('full-width');
+          showButton.classList.remove('hidden');
+          hideButton.classList.add('hidden');
+
+
+      });
+  
+      showButton.addEventListener('click', function() {
+          part3Div.classList.remove('hidden');
+          part1Div.classList.remove('full-width');
+          showButton.classList.add('hidden');
+          hideButton.classList.remove('hidden');
+
+  
+      });
+  </script>
+
+    <style>
+      .full-width {
+          width: 100%;
+      }
+      .hidden {
+          display: none;
+      }
+  </style>
+  
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dropdown = document.querySelector('.custom-dropdown');
+    
+      dropdown.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent click event from propagating to document
+    
+        dropdown.classList.toggle('active');
+      });
+    
+      document.addEventListener('click', function(event) {
+        const target = event.target;
+    
+        if (!dropdown.contains(target)) {
+          dropdown.classList.remove('active');
+        }
+      });
+    });
+  </script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdownContent = document.querySelector('.dropdown-content');
+    var popupContainer = document.querySelector('.popup-container');
+
+    dropdownContent.addEventListener('click', function() {
+      popupContainer.style.display = 'block';
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!popupContainer.contains(event.target) && !dropdownContent.contains(event.target)) {
+        closePopup();
+      }
+    });
+  });
+
+  function updateFixedValue() {
+    var newValue = document.getElementById('new-value').value;
+    var fixedValue = document.querySelector('.fixed-value');
+    fixedValue.textContent = "/" + newValue;
+    closePopup();
+  }
+
+  function closePopup() {
+    var popupContainer = document.querySelector('.popup-container');
+    popupContainer.style.display = 'none';
+  }
+
+  </script>
+  
+  <script>
+    const marksInput = document.getElementById('marks-input');
+    const warningMessage = document.getElementById('warning-message');
+
+    marksInput.addEventListener('input', function() {
+      const inputText = marksInput.value.trim();
+      if (isNaN(inputText) && inputText !== '') {
+        warningMessage.textContent = 'Marks must be numeric';
+      } else {
+        warningMessage.textContent = '';
+      }
+    });
+  </script>
+  
+
+  
+  
+</body>
+</html>

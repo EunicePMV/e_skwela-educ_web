@@ -1,0 +1,127 @@
+<!-- extends the layout of the course student stream html to get 
+    the side navbar and make layout consistent -->
+
+{% extends 'main/I_course/I_course_stream.html' %}
+
+{% load static %}
+
+{% block indiv_js %}
+    <script src="{% static 'I_course/I_course_mark.js' %}"></script>
+{% endblock %}
+
+{% block instruct_stream_course %}
+    <div class="marks-table-container">
+        <table class="marks-main-table">
+            <tbody>
+                <tr class="date-row">
+                    <td>
+                        <div class="date-title">
+                            Date
+                        </div>
+                    </td>
+                    {% for task in course.task.all %}
+                        {% if task.type != "MATERIAL" %}
+                            <td>
+                                <div class="act-date">
+                                    {{ task.due_date_time.date }}
+                                </div>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                    <td></td>
+                </tr>
+                <tr id="heading-row">
+                    <td>
+                        <div class="marks-main-heading"> 
+                            Student Name
+                        </div>
+                    </td>
+                    {% for task in course.task.all %}
+                        {% if task.type != "MATERIAL" %}
+                            <td>
+                                <div class="marks-main-heading">
+                                    {{ task.title }}
+                                </div>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                    <td></td>
+                </tr>
+                {% for student in course.students.all %}
+                    <tr class="student-context-row">
+                        <td>
+                            <div class="student-name">
+                                {% if student.first_name and student.last_name %}
+                                    {{ student.first_name }} {{ student.last_name }}
+                                {% else %}
+                                    {{ student.username }}
+                                {% endif %}
+                            </div>
+                        </td>
+
+                        {% for task in course.task.all %}
+                            {% if task.type != "MATERIAL" %}
+                                {% comment %}
+                                    <form id="mark-act" action="{% url 'grade_act' course_id=course.id student_id=student.id task_id=task.id %}" method="POST">
+                                    {% csrf_token %}
+                                {% endcomment %}
+                                <td>
+                                    <div class="student-main-score">
+                                        {% for submission in student.submission.all %}
+                                            {% for task_submission in task.submission.all %}
+                                                {% if submission == task_submission and submission.student_grade %}
+                                                    <center><a href="{{ submission.attached_file.url }}" class="attach-file-link">{{ submission.task.title | upper }}</a></center>
+                                                    <br />
+                                                    <input type="text" class="score-input {{ student.id }}-{{ course.id }}-{{ task.id }}" form="mark-act" name="score" value="{{ submission.student_grade }}" min="0">
+                                                {% elif submission == task_submission %}
+                                                    <input type="text" class="score-input {{ student.id }}-{{ course.id }}-{{ task.id }}" form="mark-act" name="score" min="0">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                <tr id="row-score-container">
+                    <td>
+                        <div class="act-score-container">
+                            Total Score / Act
+                        </div>
+                    </td>
+                    {% for task in course.task.all %}
+                        {% if task.type != "MATERIAL" %}
+                            <td>
+                                <div class="act-score">
+                                    / {{ task.score }}
+                                </div>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                    <td></td>
+                </tr>
+                {% comment %}
+                    <tr id="row-class-ave">
+                        <td>
+                            <div class="class-ave-container">
+                                Class Average
+                            </div>
+                        </td>
+                        {% for task in course.task.all %}
+                            {% if task.type != "MATERIAL" %}
+                                <td>
+                                    <div class="ave-score">
+                                        100
+                                    </div>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                        <td></td>
+                    </tr>
+                {% endcomment %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

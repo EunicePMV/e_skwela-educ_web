@@ -1,0 +1,290 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f7fe;
+  font-family: 'Inter', sans-serif;
+}
+#log{
+  font-weight: 500;
+  color: #454545;
+
+}
+label{
+  font-size: 14px;
+}
+nav {
+  background-color: #BFDFF1;
+  padding: 30px;
+  height: 100;
+  width: 100%;
+}
+nav a {
+  display: flex;
+  color: #454545;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  float: right;
+}
+nav a:hover {
+  /* background-color: darkblue; */
+  color: darkblue;
+}
+
+/*Container*/
+.container {
+  display: flex;
+  height: 500px;
+  width: 1200px;
+  background-color: white;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 20px;
+  box-shadow: 0 0 50px 10px #8da2bf;
+}
+
+/* Login Form*/
+.sub-container {
+  display: flex;
+  padding: 5rem;
+  width: 100%;
+}
+
+.main-form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  border-radius: 20px 0 0 20px;
+  flex-direction: column;
+  height: 100%;
+  padding-left: 70px;
+  padding-right: 70px;
+  background-color: rgb(255, 255, 255);
+}
+
+.form h2 {
+  font-size: 3rem;
+  font-family: 'Inter', sans-serif;
+  margin: 40px;
+}
+
+/* .label {
+  margin-left: 1rem;
+} */
+
+.box {
+  padding: 12px;
+  width: 80%;
+  margin: auto;
+  border: 1px solid black;
+  outline: none;
+  border-radius: 20px;
+}
+
+/* #submit {
+  padding: 12px 30px;
+  width: 65%;
+  margin: 15px;
+  margin-top: 40px;
+  background-color: #BFDFF1;
+  color: white;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+} */
+
+#submit {
+  padding: 12px 30px;
+  width: 65%;
+  margin: auto;
+  margin-top: 1.5rem;
+  background-color: #BFDFF1;
+  color: white;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+#submit:hover {
+  cursor: pointer;
+  background-color: darkblue;
+}
+
+.message1 {
+  margin: auto;
+  font-size: 12px;
+}
+.message2 {
+  margin: auto;
+  font-size: 11px;
+}
+a{
+  font-size: 12px;
+}
+.label {
+  margin-left: 40px;
+}
+
+.form a:hover {
+  color: red;
+}
+
+.alt-signin {
+  width: 100%;
+  margin: auto;
+  height: auto;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 150px 150px;
+  grid-row: auto auto;
+  text-align: center;
+}
+
+/* Sign in with buttons */
+.btn-altsignin {
+  height: 35px;
+  width: 80px;
+  border-radius: 20px;
+  border: 2px solid #ADA7F2;
+  background-color: white;
+  margin: auto;
+
+}
+img[alt="google"] {
+  width: 30%;
+  height: auto;
+  order: 0;
+  filter: opacity(70%);
+}
+img[alt="facebook"] {
+  width: 30%;
+  height: auto;
+  order: 0;
+  filter: opacity(70%);
+}
+
+
+
+
+/*Right Side*/
+.side {
+  display: flex;
+  flex-direction: column;
+  background-color: #BFDFF1;
+  border-radius: 20px;
+  padding: 80px 50px;
+  width: 80%;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
+
+h2 p {
+  z-index: 1 !important;
+}
+
+login-logo-img {
+  width: 100%;
+  z-index: 1;
+  height: auto;
+  order: 0;
+}
+
+img[alt="girl"] {
+  /* z-index: -1; */
+  width: 50%;
+  height: auto;
+  order: 2;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.side-headings{
+  font-size: 32px;
+  color: #454545;
+  font-weight: 500;
+  
+}
+.side-small{
+  font-size: 18px;
+  color: #454545;
+}
+
+.google-fb-a-tag {
+  padding-top: 3px;
+}
+  
+@media screen and (max-width:1100px) {
+  img[alt="girl"] {
+    display: none;
+  }
+
+  .side-headings{
+    font-size: 24px;
+    color: #454545;
+    font-weight: 500;
+    
+  }
+  .side-small{
+    font-size: 12px;
+    color: #454545;
+  }
+}
+
+@media screen and (max-width:800px) {
+  img[alt="girl"] {
+    display: none;
+  }
+
+  .side {
+    display: none;
+  }
+
+  .form {
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: rgb(255, 255, 255);
+  }
+
+  #log{
+    font-weight: 500;
+    color: #454545;
+    text-align: center;
+  
+  }
+}
+
+@media screen and (max-width:400px) {
+  .alt-signin {
+    width: 100%;
+    margin: auto;
+    height: auto;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 150px;
+    grid-row: auto;
+    text-align: center;
+  }
+
+  .btn-altsignin {
+    margin-bottom: 1.5rem;
+  }
+}

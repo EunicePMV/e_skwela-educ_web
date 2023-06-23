@@ -1,0 +1,56 @@
+<!-- extends the layout of the course stream html to get 
+    the side navbar and make layout consistent -->
+
+{% extends 'main/S_course/S_course_stream.html' %}
+
+{% load static %}
+
+{% block student_stream_course %}
+    <div class="classwork-external-container">
+        <div class="classwork-internal-container">
+            <div class="classwork-title-container">
+                <h3>
+                    Assignments
+                </h3>
+            </div>
+            <table class="classwork-main-table">
+                <tbody>
+                    {% for work in task %}
+                        {% if work.type != 'MATERIAL' %}
+                            <tr class="classwork-main-row">
+                                <td class="classwork-submission-icon">
+                                    <a href="{% url 'submission' course_id=course.id task_id=work.id %}">
+                                        <ion-icon name="document-attach-outline"></ion-icon>
+                                    </a>
+                                </td>
+                                <td class="classwork-specific-title">
+                                    {{ work.title | title }}
+                                </td>
+                                <div class="classwork-date-time-container">
+                                    <td class="classwork-main-date">
+                                        {{ work.due_date_time.date }}
+                                    </td>
+                                    <td class="classwork-main-time">
+                                        {{ work.due_date_time.time }}
+                                    </td>
+                                </div>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% comment %}
+    1. if any submission, reflect in the submission page with the unsubmit button
+    2. if submitting, when submit button is click, show unsubmit button
+
+    Other solution
+    1. using JS, load the current submission
+    2. usin JS, post the attach file
+
+    CURRENT SOLUTION:
+    1. submitted file works in django
+{% endcomment %}

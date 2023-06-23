@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+}
+
+.footer-webpage-container {
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 5rem;
+}
+
+.heading-footer-container {
+    padding: 5% 0 1% 0;
+    border-bottom: 2px solid #c7cdd1;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #000000;
+}
+
+.footer-content-container {
+    padding: 2.5% 5%;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #000000;
+}
