@@ -15,7 +15,7 @@ function assignIDtoDiv(){
     }
     for(let i = 0; i < weeks.length; i++){
         weeks[i].id = `week-${i}`
-     }
+    }
 }
 function activateDayCard(){
     let week = this.parentNode.parentNode
@@ -73,6 +73,7 @@ function dueDateActivate() {
         for(let i=0; i<task.tasks.length; i++) {
             if(task.tasks[i].due_month === month) {
                 const taskDueDate = document.querySelector(`#day-${task.tasks[i].due_date}`);
+                console.log("taskDueDate: ", taskDueDate);
                 taskDueDate.classList.add('active');
                 const taskSummary = taskDueDate.parentNode.nextSibling;
                 const taskContent = taskSummary.lastChild
@@ -147,6 +148,8 @@ function prev(){
     monthName.innerHTML = monthRef[month-1]
     removeWeeks()
     renderCalendar()
+    assignIDtoDiv()
+    dueDateActivate()
 }
 
 function next(){
@@ -157,6 +160,8 @@ function next(){
     monthName.innerHTML = monthRef[month+1]
     removeWeeks()
     renderCalendar()
+    assignIDtoDiv()
+    dueDateActivate()
 }
 function removeWeeks(){
     const elements = document.getElementsByClassName('week');

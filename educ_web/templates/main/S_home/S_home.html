@@ -62,7 +62,7 @@
                                     <img src="{% static 'images/user-person.png' %}" alt="User Image">
                                 {% endif %}
 
-                                {% if user.first_name %}
+                                {% if user.first_name and user.last_name %}
                                     <h4>{{ user.first_name }} {{ user.last_name }}</h4>
                                 {% else %}
                                     <h4>{{ user.username }}</h4>
@@ -93,37 +93,12 @@
             <img class="dashboard-header" src="{% static '/images/dashboard.png' %}" alt="Dashboard">
 
             <div class="dashboard-calendar">
-                <div class="day">
-                    <h6>Sun</h6>
-                    <h2>16</h2>
-                </div>
-                <div class="day">
-                    <h6>Mon</h6>
-                    <h2>17</h2>
-                </div>
-                <div class="day">
-                    <h6>Tues</h6>
-                    <h2>18</h2>
-                </div>
-                <div class="day">
-                    <h6>Wed</h6>
-                    <h2>19</h2>
-                </div>
-                <div class="day">
-                    <h6>Thurs</h6>
-                    <h2>20</h2>
-                </div>
-                <div class="day">
-                    <h6>Frid</h6>
-                    <h2>21</h2>
-                </div>
-                <div class="day">
-                    <h6>Sat</h6>
-                    <h2>22</h2>
-                </div>
-                <div class="next-button" style="cursor: pointer;">
-                    <img src="{% static '/images/next-button.png' %}">
-                </div>
+                {% for day,date in week_date.items %}
+                    <div class="day">
+                        <h6>{{ day }}</h6>
+                        <h2>{{ date }}</h2>
+                    </div>
+                {% endfor %}
             </div>
             <div class="dashboard-courses">
                 <!-- render enrolled course of this user -->
@@ -132,7 +107,7 @@
                         <div class="courses">
                             <a href="{% url 'student_stream' course_id=course.id %}">
                                 <img src="{% static '/images/d1.png' %}" title="Web Development">
-                                <h4 style="text-align: left; padding-left: 20px;">{{ course.name | title }}</h4>
+                                <h4 style="text-align: left; padding-left: 20px;">{{ course.name | upper }}</h4>
                                 <h6 style="text-align: left; padding-left: 20px;">
                                     {% if course.course_code %}
                                         {{ course.course_code | upper }}
@@ -144,8 +119,17 @@
                                 </h6>
                             </a>
                             <div class="professor">
-                                <img src="{% static '/images/prof1.png' %}">
-                                <p>{{ course.instructor.username | title }}</p>
+                                {% if course.instructor.profile_picture %}
+                                    <img src="{{ course.instructor.profile_picture.url }}">
+                                {% else %}
+                                    <img src="{% static 'images/user-person.png' %}">
+                                {% endif %}
+
+                                {% if course.instructor.first_name and course.instructor.last_name %}
+                                    <p>{{ course.instructor.first_name }} {{ course.instructor.last_name }}</p>
+                                {% else %}
+                                    <p>{{ course.instructor.username | upper }}</p>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
@@ -162,7 +146,7 @@
                 <div class="courses">
                     <a href="{% url 'instruct_stream' course_id=course.id %}">
                         <img src="{% static '/images/d1.png' %}" title="Web Development">
-                        <h4 style="text-align: left; padding-left: 20px;">{{ course.name | title }}</h4>
+                        <h4 style="text-align: left; padding-left: 20px;">{{ course.name | upper }}</h4>
                         <h6 style="text-align: left; padding-left: 20px;">
                             {% if course.course_code %}
                                 {{ course.course_code | upper }}
@@ -174,8 +158,17 @@
                         </h6>
                     </a>
                     <div class="professor">
-                        <img src="{% static '/images/prof1.png' %}">
-                        <p>{{ course.instructor.username | title }}</p>
+                        {% if course.instructor.profile_picture %}
+                            <img src="{{ course.instructor.profile_picture.url }}">
+                        {% else %}
+                            <img src="{% static 'images/user-person.png' %}">
+                        {% endif %}
+
+                        {% if course.instructor.first_name and course.instructor.last_name %}
+                            <p>{{ course.instructor.first_name }} {{ course.instructor.last_name }}</p>
+                        {% else %}
+                            <p>{{ course.instructor.username }}</p>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

@@ -168,6 +168,7 @@ a {
 .professor img {
     width: 25%;
     cursor: default;
+    border-radius: 50%;
 }
 
 .professor p {

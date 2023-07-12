@@ -108,12 +108,3 @@ class Submission(models.Model):
             "task": self.task.title,
             "student_grade": self.student_grade,
         }
-
-# class Grade(models.Model):
-#     student_name = models.ForeignKey(User, related_name="grade", on_delete=models.CASCADE)
-#     course = models.ForeignKey(Course, related_name="grade", on_delete=models.CASCADE)
-#     task = models.ForeignKey(Task, related_name="grade", on_delete=models.CASCADE)
-    
-#     student_grade = models.FloatField()
-
-    # student, assignment, grade, course

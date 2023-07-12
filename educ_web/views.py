@@ -21,6 +21,15 @@ def index(request):
 
 @login_required # if not authenticated prevent user going to the login dashboard by manually typing the url link
 def home(request):
+    # calendar in dashboard
+    week_date = dict()
+
+    current_date = datetime.date.today()
+    week_date[current_date.strftime("%a")] = current_date.strftime("%d")
+    for num in range(6):
+        current_date = current_date + datetime.timedelta(days=1)
+        week_date[current_date.strftime("%a")] = current_date.strftime("%d")
+
     # try to check if user login via google 
     try:
         user = SocialAccount.objects.get(user=request.user)
@@ -35,6 +44,7 @@ def home(request):
                 "user_profile": user_profile,
                 "enrolled_course": course_enrolled,
                 "instruct_course": course_instruct,
+                "week_date": week_date,
             })
         else:
             if user.provider == "google":
@@ -46,12 +56,14 @@ def home(request):
                     "user_profile": user_profile,
                     "enrolled_course": course_enrolled,
                     "instruct_course": course_instruct,
+                    "week_date": week_date,
                 })
             else:
                 return render(request, 'main/S_home/S_home.html', {
                     "user": user.user,
                     "enrolled_course": course_enrolled,
                     "instruct_course": course_instruct,
+                    "week_date": week_date,
                 })
     # else, login manually
     except:
@@ -63,12 +75,14 @@ def home(request):
                 "user_profile": user_profile,
                 "enrolled_course": request.user.enrolled.all(),
                 "instruct_course": request.user.instruct_course.all(),
+                "week_date": week_date,
             })
         
         return render(request, 'main/S_home/S_home.html', {
                     "user": request.user,
                     "enrolled_course": request.user.enrolled.all(),
                     "instruct_course": request.user.instruct_course.all(),
+                    "week_date": week_date,
                 })
 
 def calendar(request):
@@ -122,10 +136,6 @@ def todo(request):
                 
                 if task.due_date_time.date() in dates:
                     task_week.append(task.title)
-
-    # get the current week
-
-    # get the this day
 
     return render(request, 'main/S_todo/S_todo.html', {
         "user": user,
