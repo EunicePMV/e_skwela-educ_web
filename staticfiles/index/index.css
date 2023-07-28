@@ -1,0 +1,49 @@
+.index-external-container {
+    display: flex;
+    justify-content: center;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    background-color: #BFDFF1;
+    border-radius: 20px;
+    padding: 80px 50px;
+    width: 65%;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    
+    margin: 5rem 0;
+}
+
+h2 p {
+    z-index: 1 !important;
+}
+
+.index-logo-img {
+    height: auto;
+    width: 55rem;
+    z-index: 1;
+    order: 0;
+}
+
+img[alt="girl"] {
+    height: 100%;
+    width: auto;
+    order: 2;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.side-headings{
+    padding-left: 5rem;
+    font-size: 32px;
+    color: #454545;
+    font-weight: 500;
+
+}
+.side-small{
+    padding-left: 5rem;
+    font-size: 18px;
+    color: #454545;
+}

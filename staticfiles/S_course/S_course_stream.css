@@ -1,0 +1,439 @@
+/* stream course css */
+.course-navbar-temp {
+    display: none;
+    float: center;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    font-size: 1.25rem;
+    text-align: center;
+    background-color: #bfdff1;
+}
+
+.course-navbar-temp > a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.course-navbar-temp > a:hover {
+    color: #004aad;
+}
+
+.indiv-course-external {
+    display: block;
+    margin: auto;
+    min-height: 100vh;
+    max-width: 93.75rem;
+}
+
+.indiv-course-internal {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 3.5rem 2.188rem;
+}
+
+.nav-course-container {
+    border-radius: 1.875rem;
+    max-height: 36rem;
+    height: 36rem;
+    width: 20rem;
+    background-color: #BFDFF1;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-image-container {
+    padding: 1rem;
+}
+
+
+.main-course-img {
+    width: 200px;
+    height: 150px;
+    margin-bottom: 1.5rem;
+}
+
+.nav-pages-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-pages-container > a {
+    text-decoration: none;
+}
+
+.nav-pages-external-container {
+    height: 100%;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-top-left-radius: 1.875rem;
+    border-bottom-left-radius: 1.875rem;
+    position: relative;
+}
+
+.nav-pages-internal-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+}
+
+.nav-pages-external-container:hover {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+/* when parent div is hover, child container should be the following */
+.nav-pages-external-container:hover *{
+    color: #0057FE;
+    font-weight: 600;
+}
+
+/* outside curve when pages are hover */
+.nav-pages-external-container:hover .nav-pages-internal-container::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 20px 20px 0 5px #ffffff;
+    pointer-events: none;
+}
+
+.nav-pages-external-container:hover .nav-pages-internal-container::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 20px -20px 0 5px #ffffff;
+    pointer-events: none;
+}
+
+.icon-nav-pages-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #454545;
+}
+
+.nav-pages-main-text {
+    width: 80%;
+    margin: auto;
+    padding-left: 1.5rem;
+    color: #454545;
+}
+
+.course-body-container {
+    height: 100%;
+    width: calc(100% - 15rem);
+    margin-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-heading-container {
+    z-index: -1;
+}
+
+.course-main-title-heading {
+    color: #0057FE;
+    align-items: flex-start;
+}
+
+.course-section-title-heading {
+    color: #454545;
+}
+
+.course-student-post-container {
+    margin-top: 1.5rem;
+}
+
+.post-container-heading {
+    display: flex;
+    padding-left: 2.5rem;
+}
+
+.student-profile-picture {
+    height: 3.5rem;
+    width: 3.5em;
+}
+
+.main-text-student-name {
+    padding-left: 1.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    color: #0057FE;
+}
+
+.student-post-form-container:hover * {
+    transform: scale(1.01);
+    transition: ease-in-out 0.2s;
+}
+
+.post-form-course-container {
+    height: 16rem;
+    width: 100%;
+}
+
+.main-post-course-text {
+    margin-top: 1.25rem;
+    border: 1px solid #BFDFF1;
+    border-top-left-radius: 0.625rem;
+    border-top-right-radius: 0.625rem;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    resize: none;
+    height: 100%;
+    width: 100%;
+}
+
+.main-post-course-text:hover {
+    transform: scale(1.005);
+    transition: ease-in-out 0.3s;  
+}
+
+.post-course-main-button {
+    background-color: #BFDFF1;
+    color: #0057FE;
+    font-weight: bold;
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-bottom-left-radius: 0.625rem;
+    border-bottom-right-radius: 0.625rem;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    width: 100%;
+}
+
+.no-announcement {
+    margin-top: 2.5rem;
+}
+
+.main-post-content {
+    min-height: 9.375rem;
+    width: 100%;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #BFDFF1;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    border-radius: 10px;
+}
+
+.main-post-content:hover {
+    transform: scale(1.005);
+    transition: ease-in-out 0.3s; 
+}
+
+.main-task-content {
+    background-color: #BFDFF1;
+}
+
+.main-task-body-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.main-task-body-details {
+    font-size: 1rem;
+    padding-left: 1rem;
+}
+
+.main-post-heading-container {
+    display: flex;
+}
+
+.student-profile-picture-main-post {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.profile-details-post-container {
+    padding-left: 1.5rem;
+}
+
+.student-name-main-post-container {
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0057FE;
+}
+
+.main-post-date {
+    font-family: "Inter", sans-serif;
+    font-size: 0.813rem;
+    font-weight: 500;
+    color: #877F7F;
+}
+
+.main-post-body {
+    padding: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.563rem;
+}
+
+.view-post-container {
+    color: #0057FE;
+    cursor: pointer;
+    text-align: right;
+    font-size: 1.25rem;
+}
+
+.view-post-container:hover * {
+    transform: scale(1.25);
+    transition: ease-in-out 0.3s;  
+    color: #454545;
+}
+
+@media (max-width: 780px) {
+    .course-navbar-temp {
+        display: block;
+    }
+
+    .nav-course-container {
+        display: none;
+    }
+
+    .course-body-container {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* ============================= */
+
+/* classwork css */
+
+.classwork-external-container {
+    margin-top: 3rem;
+}
+
+.classwork-title-container {
+    color: #0057FE;
+    font-weight: 500;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(191, 223, 241, 0.25);
+}
+
+.classwork-main-table {
+    margin-top: 1.875rem;
+    height: 100%;
+    width: 100%;
+}
+
+.classwork-main-row{
+    max-height: 5rem;
+    height: 5rem;
+    border-radius: 1.25rem;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+}
+
+.classwork-main-row:hover {
+    transform: scale(1.01);
+    transition:step-start 0.1; 
+    border: none;
+    cursor: pointer;
+    box-shadow: 4px 4px 50px 2px rgba(191, 223, 241, 0.5);
+    color: #0057FE;
+}
+
+.classwork-submission-icon {
+    max-width: 3.633rem;
+    padding: 0 1rem 0 1.5rem;
+}
+
+.classwork-submission-icon:hover > a {
+    transform: scale(1.01);
+    transition:step-start 0.3s;  
+    color: #6eb3e7;
+}
+
+.classwork-specific-title {
+    max-width: 24.002rem;
+    padding: 0 1rem 0 1.5rem;
+}
+
+.classwork-main-date {
+    max-width: 16.848rem;
+    padding: 0 1rem 0 1.5rem;
+}
+
+.classwork-main-time {
+    max-width: 5.548rem;
+    padding: 0 1rem 0 1.5rem;
+}
+
+.classwork-specific-title > div{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 500px) {
+    .classwork-external-container {
+        overflow-x: auto;
+    }
+}
+
+/* ============================= */
+
+/* people css */
+
+.people-external-container {
+    margin-top: 3rem;
+}
+
+.people-instruct-container {
+    color: #0057FE;
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.people-instruct-main-img {
+    border-radius: 50%;
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+.people-instruct-name-main-container {
+    padding-left: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem !important;
+}
+
+.people-student-title-container {
+    margin-top: 5rem;
+    color: #0057FE;
+    font-weight: 500;
+}
+
+.people-student-row-container {
+    height: 3.625rem;
+    max-height: 3.625rem;
+}
+
+.people-student-main-img {
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.people-student-name-main-context {
+    padding-left: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem !important;
+}
