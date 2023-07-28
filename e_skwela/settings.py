@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-8#fgc#m4rn=qrxp!f1g67^a5z3)q=pz4&v0=d3k$($ek0equny
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -167,10 +167,22 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
+        'HOST': 'containers-us-west-130.railway.app',
+        'PORT': '6608',
     }
 }
 
