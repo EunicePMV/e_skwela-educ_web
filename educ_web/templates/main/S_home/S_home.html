@@ -88,6 +88,15 @@
 {% endblock %}
 
 {% block body %}
+    {% if msg %}
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>
+                {{ msg }}
+            </div>
+        </div>
+    {% endif %}
+
     <main>
         <div class="container" style="text-align: center; margin-top: 50px;">
             <img class="dashboard-header" src="{% static '/images/dashboard.png' %}" alt="Dashboard">
@@ -336,7 +345,7 @@
                                 <label for="floatingTextarea3">Email</label>
                             </div>
                             <div class="form-floating">
-                                <input type="file" name="profilePicture" class="form-control" placeholder="Profile Picture" value="{{ user.filename }}"
+                                <input type="file" name="profilePicture" class="form-control" placeholder="Profile Picture"
                                     id="profilePicture" style="margin-bottom: 25px; max-height: 350px;">
                                 <label for="floatingTextarea3">Profile Picture</label>
                             </div>

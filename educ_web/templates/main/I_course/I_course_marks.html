@@ -61,10 +61,6 @@
 
                         {% for task in course.task.all %}
                             {% if task.type != "MATERIAL" %}
-                                {% comment %}
-                                    <form id="mark-act" action="{% url 'grade_act' course_id=course.id student_id=student.id task_id=task.id %}" method="POST">
-                                    {% csrf_token %}
-                                {% endcomment %}
                                 <td>
                                     <div class="student-main-score">
                                         {% for submission in student.submission.all %}
@@ -74,6 +70,8 @@
                                                     <br />
                                                     <input type="text" class="score-input {{ student.id }}-{{ course.id }}-{{ task.id }}" form="mark-act" name="score" value="{{ submission.student_grade }}" min="0">
                                                 {% elif submission == task_submission %}
+                                                    <center><a href="{{ submission.attached_file.url }}" class="attach-file-link">{{ submission.task.title | upper }}</a></center>
+                                                    <br />
                                                     <input type="text" class="score-input {{ student.id }}-{{ course.id }}-{{ task.id }}" form="mark-act" name="score" min="0">
                                                 {% endif %}
                                             {% endfor %}
@@ -102,25 +100,6 @@
                     {% endfor %}
                     <td></td>
                 </tr>
-                {% comment %}
-                    <tr id="row-class-ave">
-                        <td>
-                            <div class="class-ave-container">
-                                Class Average
-                            </div>
-                        </td>
-                        {% for task in course.task.all %}
-                            {% if task.type != "MATERIAL" %}
-                                <td>
-                                    <div class="ave-score">
-                                        100
-                                    </div>
-                                </td>
-                            {% endif %}
-                        {% endfor %}
-                        <td></td>
-                    </tr>
-                {% endcomment %}
             </tbody>
         </table>
     </div>

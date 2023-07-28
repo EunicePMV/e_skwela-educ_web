@@ -41,7 +41,7 @@ urlpatterns = [
     # API Routes
     path("user/<int:user_id>", views.user_api, name="user"),
     path("course/<int:course_id>", views.course_api, name="course"),
-    path("submission/<int:student_id>/<int:course_id>/<int:task_id>", views.submission_api, name="submission_api"),
+    path("instructor/mark/submission/<int:student_id>/<int:course_id>/<int:task_id>", views.submission_api, name="submission_api"),
     path("task/<int:student_id>", views.user_task, name="user_task"),
 
     # POST data 

@@ -10,6 +10,114 @@
     Vision
 {% endblock %}
 
+{% block navbar %}
+    {% if user.is_authenticated %}
+        <div class="nav-bar">
+            <nav class="navbar navbar-expand-lg"
+                style="background-color: #BFDFF1; padding: 15px;">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                        <img src="{% static '/images/logo.png' %}" alt="logo" height="60" width="170" style="margin-left: 50px;">
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}" style="padding-right: 20px;"><i class="fa-solid fa-inbox"
+                                        style="padding: 10px;"></i>Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'todo' %}" style="padding-right: 20px;"><i class="fa-solid fa-file"
+                                        style="padding: 10px;"></i>To do</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="user-id-calendar" class="nav-link {{ user.id }}" href="{% url 'calendar' %}" style="padding-right: 20px;"><i
+                                        class="fa-solid fa-calendar-days" style="padding: 10px;"></i>Calendar</a>
+                            </li>
+                        </ul>
+
+                        {% if user_profile %}
+                            <img src="{{ user_profile }}" class="user-pic" onclick="toggleMenu()">
+                        {% elif user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                        {% else %}
+                            <!-- <img src="{% static 'images/Profile.png' %}" class="user-pic" onclick="toggleMenu()"> -->
+                            <img src="{% static 'images/user-person.png' %}" class="user-pic" onclick="toggleMenu()">
+                        {% endif %}
+
+                        <div class="sub-menu-wrap" id="subMenu">
+                            <div class="sub-menu">
+                                <div class="user-info">
+                                    {% if user_profile %}
+                                        <img src="{{ user_profile }}" alt="User Image">
+                                    {% elif user.profile_picture %}
+                                        <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                                    {% else %}
+                                        <img src="{% static 'images/user-person.png' %}" alt="User Image">
+                                    {% endif %}
+
+                                    {% if user.first_name and user.last_name %}
+                                        <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                                    {% else %}
+                                        <h4>{{ user.username }}</h4>
+                                    {% endif %}
+                                </div>
+                                <hr>
+                                <a href="#" class="sub-menu-link" data-bs-toggle="modal" data-bs-target="#manual-modal">
+                                    <img src="{% static 'images/user-image.png' %}">
+                                    <p>Edit Profile</p>
+                                    <span>></span>
+                                </a>
+                                <a href="{% url 'account_logout' %}" class="sub-menu-link">
+                                    <img src="{% static 'images/logout.png' %}">
+                                    <p>Sign Out</p>
+                                    <span>></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    {% else %}
+        <div class="nav-bar">
+            <nav class="navbar navbar-expand-lg"
+                style="background-color: #BFDFF1; padding: 15px;">
+                <div class="container-fluid">
+                        <a class="navbar-brand" href="{% url 'index' %}">
+                            <img src="{% static '/images/logo.png' %}" alt="logo" height="60" width="170" style="margin-left: 50px;">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 10px;">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'account_login' %}" style="padding-right: 20px;"><i class="fa-solid fa-inbox"
+                                            style="padding: 10px;"></i>Sign In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'account_signup' %}" style="padding-right: 20px;"><i class="fa-solid fa-file"
+                                            style="padding: 10px;"></i>Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     <div class="footer-webpage-container">
         <div class="heading-footer-container">

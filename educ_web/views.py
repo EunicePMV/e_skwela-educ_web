@@ -6,6 +6,7 @@ from django.urls import reverse
 from itertools import chain
 from operator import attrgetter
 import json, datetime, string, random
+from django.views.decorators.csrf import csrf_exempt
 
 from allauth.socialaccount.models import SocialAccount
 from .models import User, Course, Post, Task, Submission
@@ -16,19 +17,26 @@ def classcode_generator():
     string_code = string.ascii_uppercase + string.digits
     return ''.join(random.choice(string_code) for _ in range(size))
 
+# generate the nxt following 6 days
+def date():
+    # calendar in dashboard
+    week_date = dict()
+
+    current_date = datetime.date.today()
+    week_date[current_date.strftime("%a")] = current_date.strftime("%d")
+    for _ in range(6):
+        current_date = current_date + datetime.timedelta(days=1)
+        week_date[current_date.strftime("%a")] = current_date.strftime("%d")
+    
+    return week_date
+
 def index(request):
     return render(request, 'main/index/index.html')
 
 @login_required # if not authenticated prevent user going to the login dashboard by manually typing the url link
 def home(request):
     # calendar in dashboard
-    week_date = dict()
-
-    current_date = datetime.date.today()
-    week_date[current_date.strftime("%a")] = current_date.strftime("%d")
-    for num in range(6):
-        current_date = current_date + datetime.timedelta(days=1)
-        week_date[current_date.strftime("%a")] = current_date.strftime("%d")
+    week_date = date()
 
     # try to check if user login via google 
     try:
@@ -169,7 +177,8 @@ def course_api(request, course_id):
     if request.method == "GET":
         course = Course.objects.get(pk=course_id)
         return JsonResponse(course.serialize())
-    
+
+@csrf_exempt
 def submission_api(request, student_id, course_id, task_id):
     try:
         submission = Submission.objects.get(student_name=student_id, course=course_id, task=task_id)
@@ -249,16 +258,81 @@ def save_course(request):
                         instructor=request.user,
                         classcode=classcode)
         new_course.save()
-        
+
         return HttpResponseRedirect(reverse("home"))
 
 def join_course(request):
     if request.method == "POST":
         classcode = request.POST["classcode"]
-        join_course  = Course.objects.get(classcode=classcode)
-        join_course.students.add(request.user)
 
-        return HttpResponseRedirect(reverse("home"))
+        try:
+            join_course  = Course.objects.get(classcode=classcode)
+            join_course.students.add(request.user)
+            return HttpResponseRedirect(reverse("home"))
+        except:
+            # calendar in dashboard
+            week_date = date()
+
+            # try to check if user login via google 
+            try:
+                msg = "Invalid Classcode."
+                user = SocialAccount.objects.get(user=request.user)
+                course_enrolled = user.user.enrolled.all()
+                course_instruct = user.user.instruct_course.all()
+
+                if(user.user.profile_picture):
+                    user_profile = user.user.profile_picture.url
+
+                    return render(request, 'main/S_home/S_home.html', {
+                        "user": user.user,
+                        "user_profile": user_profile,
+                        "enrolled_course": course_enrolled,
+                        "instruct_course": course_instruct,
+                        "week_date": week_date,
+                        "msg": msg,
+                    })
+                else:
+                    if user.provider == "google":
+                        # google profile picture
+                        user_profile = user.extra_data['picture']
+
+                        return render(request, 'main/S_home/S_home.html', {
+                            "user": user.user,
+                            "user_profile": user_profile,
+                            "enrolled_course": course_enrolled,
+                            "instruct_course": course_instruct,
+                            "week_date": week_date,
+                            "msg": msg,
+                        })
+                    else:
+                        return render(request, 'main/S_home/S_home.html', {
+                            "user": user.user,
+                            "enrolled_course": course_enrolled,
+                            "instruct_course": course_instruct,
+                            "week_date": week_date,
+                            "msg": msg,
+                        })
+            # else, login manually
+            except:
+                if request.user.profile_picture:
+                    user_profile = request.user.profile_picture.url
+
+                    return render(request, 'main/S_home/S_home.html', {
+                        "user": request.user,
+                        "user_profile": user_profile,
+                        "enrolled_course": request.user.enrolled.all(),
+                        "instruct_course": request.user.instruct_course.all(),
+                        "week_date": week_date,
+                        "msg": msg,
+                    })
+                
+                return render(request, 'main/S_home/S_home.html', {
+                            "user": request.user,
+                            "enrolled_course": request.user.enrolled.all(),
+                            "instruct_course": request.user.instruct_course.all(),
+                            "week_date": week_date,
+                            "msg": msg,
+                        })
     
 # POST method for announcements / course post
 def post_content(request, course_id):

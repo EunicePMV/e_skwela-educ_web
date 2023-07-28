@@ -3,16 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
     studentScores = document.querySelectorAll('.score-input');
     studentScores.forEach(studentScore => {
         studentScore.addEventListener('change', function(e) {
-            stringId = studentScore.className.slice(11, 18).trim();
+            stringId = studentScore.className.slice(11, 19).trim();
             id = stringId.split("-")
 
             const grade = studentScore.value;
-            console.log(`/submission/${id[0]}/${id[1]}/${id[2]}`);
+            // console.log(id);
+            console.log(`submission/${id[0]}/${id[1]}/${id[2]}`);
 
             // get student.id course.id and task.id
-            fetch(`/submission/${id[0]}/${id[1]}/${id[2]}`, {
+            fetch(`submission/${id[0]}/${id[1]}/${id[2]}`, {
                 method: 'PUT',
-                headers: {'X-CSRFToken': csrftoken},
+                headers: {'X-CSRFTokesubmissionn': csrftoken},
                 body: JSON.stringify({
                     grade: grade
                 })
