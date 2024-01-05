@@ -194,12 +194,11 @@ DATABASES = {
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'elephantsql',
         'USER': 'cgtekqbt',
         'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
-        'HOST': 'tyke.db.elephantsql.com',
+        'HOST': 'tyke.db.elephantsql.com (tyke-01)',
         'PORT': '5432',
     }
 }
