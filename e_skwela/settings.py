@@ -178,6 +178,7 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 #     }
 # }
 
+# USED WHEN DEPLOYED IN RAILWAY
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
@@ -187,6 +188,19 @@ DATABASES = {
         'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
         'HOST': 'containers-us-west-130.railway.app',
         'PORT': '6608',
+    }
+}
+
+# USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
+DATABASES = {
+    'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'elephantsql',
+        'USER': 'cgtekqbt',
+        'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
+        'HOST': 'tyke.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
 
