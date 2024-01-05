@@ -195,10 +195,10 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'elephantsql',
+        'NAME': 'cgtekqbt',
         'USER': 'cgtekqbt',
         'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
-        'HOST': 'tyke.db.elephantsql.com (tyke-01)',
+        'HOST': 'tyke.db.elephantsql.com',
         'PORT': '5432',
     }
 }
