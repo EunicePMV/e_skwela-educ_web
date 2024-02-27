@@ -531,8 +531,8 @@ def submission(request, course_id, task_id):
 # ===============================================================
 
 # BOTH: not use, instead used accounts/login & accounts/signup 
-def login(request):
-    return render(request, 'main/login/login.html')
+# def login(request):
+#     return render(request, 'main/login/login.html')
 
-def register(request):
-    return render(request, 'main/register/register.html')
+# def register(request):
+#     return render(request, 'main/register/register.html')
