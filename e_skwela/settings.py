@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+# FIX THE SOCIAL MEDIA ACCOUNTS IN DEPLOYMENT
+
 import os
 
 from pathlib import Path
@@ -27,7 +29,7 @@ SECRET_KEY = 'django-insecure-8#fgc#m4rn=qrxp!f1g67^a5z3)q=pz4&v0=d3k$($ek0equny
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 
 # Application definition
@@ -49,7 +51,7 @@ INSTALLED_APPS = [
     # djago-widget-tweaks
     'widget_tweaks',
 
-    # django-cleanup for ImageFiel,FileField
+    # django-cleanup for ImageFile,FileField
     'django_cleanup.apps.CleanupConfig',
 
     'whitenoise.runserver_nostatic',
@@ -141,7 +143,7 @@ ROOT_URLCONF = 'e_skwela.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'staticfiles'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,34 +164,23 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'educ_web',
-#         'USER': 'webdevgrp',
-#         'PASSWORD': 'webdevproj',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
 
 # USED WHEN DEPLOYED IN RAILWAY
-DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
-        'HOST': 'containers-us-west-130.railway.app',
-        'PORT': '6608',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         #'ENGINE': 'django.db.backends.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
+#         'HOST': 'containers-us-west-130.railway.app',
+#         'PORT': '6608',
+#     }
+# }
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
 DATABASES = {
@@ -246,11 +237,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATIC_URL = 'staticfiles/'
+STATIC_ROOT = BASE_DIR / "staticfiles" # COMMENTED THIS
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static") # COMMENTED THIS
+# ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -265,3 +256,10 @@ AUTH_USER_MODEL = 'educ_web.User'
 # profile picture to upload
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
+# client_id = 724125503755-kpfe1kt92tp30r0dhdmo5jjsa1ch6tqq.apps.googleusercontent.com
+# client_secret = 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
+
+# admin
+# EunicePMV
+# Eskwela08/23
