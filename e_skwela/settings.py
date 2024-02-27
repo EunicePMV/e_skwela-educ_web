@@ -65,7 +65,7 @@ INSTALLED_APPS = [
 ]
 
 # django-allauth other settings
-SITE_ID = 1
+SITE_ID = 2
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -143,7 +143,7 @@ ROOT_URLCONF = 'e_skwela.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'staticfiles'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -237,10 +237,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'staticfiles/'
 STATIC_ROOT = BASE_DIR / "staticfiles" # COMMENTED THIS
 # STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static") COMMENTED THIS
+#     os.path.join(BASE_DIR, "static") # COMMENTED THIS
 # ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
