@@ -162,12 +162,12 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # USED WHEN DEPLOYED IN RAILWAY
 # DATABASES = {
@@ -183,16 +183,16 @@ DATABASES = {
 # }
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'cgtekqbt',
-#         'USER': 'cgtekqbt',
-#         'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
-#         'HOST': 'tyke.db.elephantsql.com',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cgtekqbt',
+        'USER': 'cgtekqbt',
+        'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
+        'HOST': 'tyke.db.elephantsql.com',
+        'PORT': '5432',
+    }
+}
 
 TIME_ZONE = 'America/Chicago'
 USE_TZ = True
