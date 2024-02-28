@@ -44,7 +44,7 @@ def home(request):
         course_enrolled = user.user.enrolled.all()
         course_instruct = user.user.instruct_course.all()
 
-        if(user.user.profile_picture):
+        if user.user.profile_picture:
             user_profile = user.user.profile_picture.url
 
             return render(request, 'main/S_home/S_home.html', {
@@ -151,14 +151,6 @@ def todo(request):
         "task_today": task_today,
         "task_week": task_week
     })
-
-# removed
-def todo_missing(request):
-    return render(request, 'main/S_todo/S_todo_missing.html')
-
-# removed
-def todo_done(request):
-    return render(request, 'main/S_todo/S_todo_done.html')
 
 def edit_profile(request):
     return render(request, 'main/edit_profile/edit_profile.html')

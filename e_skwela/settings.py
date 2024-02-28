@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 
 from pathlib import Path
 
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-8#fgc#m4rn=qrxp!f1g67^a5z3)q=pz4&v0=d3k$($ek0equny
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 
 # Application definition
@@ -171,37 +172,39 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+# USED WHEN DEPLOYED IN RAILWAY
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         #'ENGINE': 'django.db.backends.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
+#         'HOST': 'containers-us-west-130.railway.app',
+#         'PORT': '6608',
 #     }
 # }
 
-# USED WHEN DEPLOYED IN RAILWAY
-DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
-        'HOST': 'containers-us-west-130.railway.app',
-        'PORT': '6608',
-    }
-}
+load_dotenv()
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cgtekqbt',
-        'USER': 'cgtekqbt',
-        'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
-        'HOST': 'tyke.db.elephantsql.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DATABASE_NAME'),
+#         'USER': os.getenv('DATABASE_USER'),
+#         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+#         'HOST': os.getenv('DATABASE_HOST'),
+#         'PORT': os.getenv('DATABASE_PORT'),
+#     }
+# }
 
 TIME_ZONE = 'America/Chicago'
 USE_TZ = True
@@ -246,11 +249,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static")
+# ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -265,3 +268,5 @@ AUTH_USER_MODEL = 'educ_web.User'
 # profile picture to upload
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
+# Eskwela08/23; course code: U69CFKD
