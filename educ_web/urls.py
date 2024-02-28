@@ -15,8 +15,8 @@ urlpatterns = [
 
     path("home", views.home, name="home"),
     path("todo", views.todo, name="todo"),
-    path("todo/missing", views.todo_missing, name="todo_missing"),
-    path("todo/done", views.todo_done, name="todo_done"),
+    # path("todo/missing", views.todo_missing, name="todo_missing"),
+    # path("todo/done", views.todo_done, name="todo_done"),
 
     path("edit_profile", views.edit_profile, name="edit_profile"),
 
