@@ -6,8 +6,8 @@ urlpatterns = [
     path("", views.index, name="index"),
 
     # to be removed:
-    path("login", views.login, name="login"),
-    path("register", views.register, name="register"),
+    # path("login", views.login, name="login"),
+    # path("register", views.register, name="register"),
 
     path("calendar", views.calendar, name="calendar"),
 

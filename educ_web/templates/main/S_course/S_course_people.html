@@ -15,8 +15,8 @@
             </div>
             <hr />
             <div class="people-profile-instruct-container">
-                {% if instructor.profile_picture %}
-                    <img src="{{ instructor.profile_picture.url }}" alt="Instructor Profile Picture" class="people-instruct-main-img">
+                {% if instructor.profile_url %}
+                    <img src="{{ instructor.profile_url }}" alt="Instructor Profile Picture" class="people-instruct-main-img">
                 {% else %}
                     <img src="{% static 'images/user-person.png' %}" alt="Instructor Profile Picture" class="people-instruct-main-img">
                 {% endif %}
@@ -40,8 +40,8 @@
                         {% for student in students %}
                             <tr class="people-student-row-container">
                                 <td>
-                                    {% if student.profile_picture %}
-                                        <img src="{{ student.profile_picture.url }}" alt="Student Profile Picture" class="people-student-main-img">
+                                    {% if student.profile_url %}
+                                        <img src="{{ student.profile_url }}" alt="Student Profile Picture" class="people-student-main-img">
                                     {% else %}
                                         <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="people-student-main-img">
                                     {% endif %}

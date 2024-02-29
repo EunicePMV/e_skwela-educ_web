@@ -268,5 +268,7 @@ AUTH_USER_MODEL = 'educ_web.User'
 # profile picture to upload
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+# ADDED THIS 
+TEMP_UPLOAD_DIR = os.path.join(BASE_DIR, 'temp_uploads')
 
 # Eskwela08/23; course code: U69CFKD

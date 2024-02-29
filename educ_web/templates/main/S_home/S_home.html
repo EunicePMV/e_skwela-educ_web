@@ -44,8 +44,8 @@
 
                     {% if user_profile %}
                         <img src="{{ user_profile }}" class="user-pic" onclick="toggleMenu()">
-                    {% elif user.profile_picture %}
-                        <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                    {% elif user.profile_url %}
+                        <img src="{{ user.profile_url }}" class="user-pic" onclick="toggleMenu()">
                     {% else %}
                         <!-- <img src="{% static 'images/Profile.png' %}" class="user-pic" onclick="toggleMenu()"> -->
                         <img src="{% static 'images/user-person.png' %}" class="user-pic" onclick="toggleMenu()">
@@ -56,8 +56,8 @@
                             <div class="user-info">
                                 {% if user_profile %}
                                     <img src="{{ user_profile }}" alt="User Image">
-                                {% elif user.profile_picture %}
-                                    <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                                {% elif user.profile_url %}
+                                    <img src="{{ user.profile_url }}" class="user-pic" onclick="toggleMenu()">
                                 {% else %}
                                     <img src="{% static 'images/user-person.png' %}" alt="User Image">
                                 {% endif %}
@@ -128,8 +128,8 @@
                                 </h6>
                             </a>
                             <div class="professor">
-                                {% if course.instructor.profile_picture %}
-                                    <img src="{{ course.instructor.profile_picture.url }}">
+                                {% if course.instructor.profile_url %}
+                                    <img src="{{ course.instructor.profile_url }}">
                                 {% else %}
                                     <img src="{% static 'images/user-person.png' %}">
                                 {% endif %}
@@ -167,8 +167,8 @@
                         </h6>
                     </a>
                     <div class="professor">
-                        {% if course.instructor.profile_picture %}
-                            <img src="{{ course.instructor.profile_picture.url }}">
+                        {% if course.instructor.profile_url %}
+                            <img src="{{ course.instructor.profile_url }}">
                         {% else %}
                             <img src="{% static 'images/user-person.png' %}">
                         {% endif %}
@@ -360,7 +360,7 @@
         </div>
     </div>
     <script>
-        
+
         // Expanded
         function expandDiv(id) {
             var div = document.getElementById(id);

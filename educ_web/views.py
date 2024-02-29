@@ -11,6 +11,15 @@ from django.views.decorators.csrf import csrf_exempt
 from allauth.socialaccount.models import SocialAccount
 from .models import User, Course, Post, Task, Submission
 
+# ADDED THIS
+import os, mimetypes
+from supabase import create_client, Client
+from storage3.utils import StorageException
+
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+
 # randomly generate classcode
 def classcode_generator():
     size = 7
@@ -75,9 +84,9 @@ def home(request):
                 })
     # else, login manually
     except:
-        if request.user.profile_picture:
-            user_profile = request.user.profile_picture.url
-
+        # ADDED THIS 
+        if request.user.profile_url:
+            user_profile = request.user.profile_url
             return render(request, 'main/S_home/S_home.html', {
                 "user": request.user,
                 "user_profile": user_profile,
@@ -92,6 +101,25 @@ def home(request):
                     "instruct_course": request.user.instruct_course.all(),
                     "week_date": week_date,
                 })
+
+        # COMMENTED THIS
+        # if request.user.profile_picture:
+        #     user_profile = request.user.profile_picture.url
+
+        #     return render(request, 'main/S_home/S_home.html', {
+        #         "user": request.user,
+        #         "user_profile": user_profile,
+        #         "enrolled_course": request.user.enrolled.all(),
+        #         "instruct_course": request.user.instruct_course.all(),
+        #         "week_date": week_date,
+        #     })
+        
+        # return render(request, 'main/S_home/S_home.html', {
+        #             "user": request.user,
+        #             "enrolled_course": request.user.enrolled.all(),
+        #             "instruct_course": request.user.instruct_course.all(),
+        #             "week_date": week_date,
+        #         })
 
 def calendar(request):
     year = datetime.date.today().year
@@ -220,8 +248,26 @@ def update_profile(request):
         user.email = email
 
         try: 
+            # ADDED THIS 
             profile_picture = request.FILES["profilePicture"]
-            user.profile_picture = profile_picture
+            bytes_content = profile_picture.read()
+            with open(f'{profile_picture.name}.bin', 'wb') as f:
+                f.write(bytes_content)
+
+                res = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
+                try:
+                    res = supabase.storage.from_("profile").update(file=f'{profile_picture.name}.bin', path=f'./{user}/profile-picture.jpeg', file_options={'cache-control': '3600', 'upsert': 'true'})
+                except StorageException:
+                    res = supabase.storage.from_("profile").upload(file=f'{profile_picture.name}.bin', path=f"./{user}/profile-picture.jpeg", file_options={'content-type': 'image/jpeg'})
+
+            profile_url = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
+            user.profile_url = profile_url
+
+            """
+            APPLICABLE ONLY DURING DEVELOPMENT
+            user.profile_picture = profile_picture 
+            """
+            
             user.save()
         except:
             user.save()
@@ -306,8 +352,9 @@ def join_course(request):
                         })
             # else, login manually
             except:
-                if request.user.profile_picture:
-                    user_profile = request.user.profile_picture.url
+                # ADDED THIS 
+                if request.user.profile_url:
+                    user_profile = request.user.profile_url
 
                     return render(request, 'main/S_home/S_home.html', {
                         "user": request.user,
@@ -324,7 +371,28 @@ def join_course(request):
                             "instruct_course": request.user.instruct_course.all(),
                             "week_date": week_date,
                             "msg": msg,
-                        })
+                })
+
+                # COMMENTED THIS
+                # if request.user.profile_picture:
+                #     user_profile = request.user.profile_picture.url
+
+                #     return render(request, 'main/S_home/S_home.html', {
+                #         "user": request.user,
+                #         "user_profile": user_profile,
+                #         "enrolled_course": request.user.enrolled.all(),
+                #         "instruct_course": request.user.instruct_course.all(),
+                #         "week_date": week_date,
+                #         "msg": msg,
+                #     })
+                
+                # return render(request, 'main/S_home/S_home.html', {
+                #             "user": request.user,
+                #             "enrolled_course": request.user.enrolled.all(),
+                #             "instruct_course": request.user.instruct_course.all(),
+                #             "week_date": week_date,
+                #             "msg": msg,
+                #         })
     
 # POST method for announcements / course post
 def post_content(request, course_id):
@@ -348,10 +416,37 @@ def save_attachment(request, course_id, task_id):
         course = Course.objects.get(pk=course_id)
         task = Task.objects.get(pk=task_id)
         submission_status = True
-        attach_file = request.FILES["attach-file"]
 
-        submit_file = Submission(student_name=user, course=course, task=task, submission_status=submission_status, attached_file=attach_file)
+        attach_file = request.FILES["attach-file"]
+        file_bytes = attach_file.read()
+        with open(f"{attach_file.name}.bin", "wb") as f:
+
+            f.write(file_bytes)
+
+            res = supabase.storage.from_("submission").get_public_url(f"{user}/profile-picture.jpeg")
+            try:
+                res = supabase.storage.from_("submission").update(file=f'{attach_file.name}.bin', path=f'./{task}/{user}', file_options={'cache-control': '3600', 'upsert': 'true'})
+            except StorageException:
+                res = supabase.storage.from_("submission").upload(file=f'{attach_file.name}.bin', path=f"./{task}/{user}", file_options={'content-type': attach_file.content_type})
+
+        attachment_url = supabase.storage.from_('submission').get_public_url(f"{task}/{user}")
+        submit_file = Submission(student_name=user, course=course, task=task, submission_status=submission_status, attached_url=attachment_url)
         submit_file.save()
+        # profile_picture = request.FILES["profilePicture"]
+        # bytes_content = profile_picture.read()
+        # with open(f'{profile_picture.name}.bin', 'wb') as f:
+        #     f.write(bytes_content)
+
+        #     res = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
+        #     try:
+        #         res = supabase.storage.from_("profile").update(file=f'{profile_picture.name}.bin', path=f'./{user}/profile-picture.jpeg', file_options={'cache-control': '3600', 'upsert': 'true'})
+        #     except StorageException:
+        #         res = supabase.storage.from_("profile").upload(file=f'{profile_picture.name}.bin', path=f"./{user}/profile-picture.jpeg", file_options={'content-type': 'image/jpeg'})
+
+        # profile_url = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
+        # user.profile_url = profile_url
+        # submit_file = Submission(student_name=user, course=course, task=task, submission_status=submission_status, attached_file=attach_file)
+        # submit_file.save()
 
         return HttpResponseRedirect(reverse("submission", args=(course_id, task_id)))
 
@@ -363,6 +458,7 @@ def del_attachment(request, course_id, task_id):
         task = Task.objects.get(pk=task_id)
         submission = Submission.objects.get(student_name=user.id, course=course.id, task=task.id)
         submission.delete()
+        res = supabase.storage.from_("submission").remove(f"{task}/{user}")
 
         return HttpResponseRedirect(reverse("submission", args=(course_id, task_id)))
 
@@ -504,6 +600,7 @@ def student_classwork(request, course_id):
 def submission(request, course_id, task_id):
     course = Course.objects.get(pk=course_id)
     task = course.task.get(pk=task_id)
+
     try:
         submission = Submission.objects.get(student_name=request.user, task=task.id)
         return render(request, 'main/S_submission/S_submission.html', {
@@ -523,8 +620,8 @@ def submission(request, course_id, task_id):
 # ===============================================================
 
 # BOTH: not use, instead used accounts/login & accounts/signup 
-def login(request):
-    return render(request, 'main/login/login.html')
+# def login(request):
+#     return render(request, 'main/login/login.html')
 
-def register(request):
-    return render(request, 'main/register/register.html')
+# def register(request):
+#     return render(request, 'main/register/register.html')

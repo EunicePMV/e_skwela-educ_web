@@ -14,8 +14,8 @@
     <main>
         <div class="instructor">
             <div id="i-profile">
-                {% if course.instructor.profile_picture %}
-                    <img src="{{ course.instructor.profile_picture.url }}">
+                {% if course.instructor.profile_url %}
+                    <img src="{{ course.instructor.profile_url }}">
                 {% else %}
                     <img src="https://yt3.ggpht.com/7qgVlNH_i-M7g3rwVfGHo5B3j-llO4sxKDdh4IWoHkwfO8JMhd2EoW6gcge_R_-t-ldUWMxJZQ=s88-c-k-c0x00ffffff-no-rj">
                 {% endif %}
