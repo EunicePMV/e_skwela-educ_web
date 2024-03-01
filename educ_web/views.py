@@ -12,7 +12,7 @@ from allauth.socialaccount.models import SocialAccount
 from .models import User, Course, Post, Task, Submission
 
 # ADDED THIS
-import os, mimetypes
+import os, io
 from supabase import create_client, Client
 from storage3.utils import StorageException
 
@@ -251,17 +251,17 @@ def update_profile(request):
             # ADDED THIS 
             profile_picture = request.FILES["profilePicture"]
             bytes_content = profile_picture.read()
-            with open(f'{profile_picture.name}.bin', 'wb') as f:
-                f.write(bytes_content)
 
-                res = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
-                try:
-                    res = supabase.storage.from_("profile").update(file=f'{profile_picture.name}.bin', path=f'./{user}/profile-picture.jpeg', file_options={'cache-control': '3600', 'upsert': 'true'})
-                except StorageException:
-                    res = supabase.storage.from_("profile").upload(file=f'{profile_picture.name}.bin', path=f"./{user}/profile-picture.jpeg", file_options={'content-type': 'image/jpeg'})
+            res = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
+            try:
+                res = supabase.storage.from_("profile").update(file=bytes_content, path=f'./{user}/profile-picture.jpeg', file_options={'cache-control': '3600', 'upsert': 'true', 'content-type': 'image/jpeg'})
+            except StorageException:
+                res = supabase.storage.from_("profile").upload(file=bytes_content, path=f"./{user}/profile-picture.jpeg", file_options={'content-type': 'image/jpeg'})
 
             profile_url = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
             user.profile_url = profile_url
+
+            # different profile is saved 
 
             """
             APPLICABLE ONLY DURING DEVELOPMENT
