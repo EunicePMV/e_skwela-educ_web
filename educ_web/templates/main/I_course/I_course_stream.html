@@ -5,10 +5,10 @@
 {% block script %}
     <link href="{% static 'I_course/I_course_stream.css' %}" rel="stylesheet">
     
-    <!-- classwork page -->
+    <!-- CLASSWORK PAGE -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <!-- people page -->
+    <!-- PEOPLE PAGE -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -213,13 +213,6 @@
                                                 {% endif %}
                                             </div>
                                         </div>
-                                        {% if post.type != 'MATERIAL' %}
-                                            <div class="view-post-container">
-                                                <a href="{% url 'submission' course_id=course.id task_id=post.id %}">
-                                                    <ion-icon name="eye-outline" class=""></ion-icon>
-                                                </a>
-                                            </div>
-                                        {% endif %}
                                 </div>
                                 {% endif %}
                             {% endfor %}

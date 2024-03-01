@@ -3,7 +3,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import os
 
-# Create your models here.
+"""
+Custom User Model
+"""
 class User(AbstractUser):
     first_name = models.CharField(max_length=20, blank=True)
     last_name = models.CharField(max_length=20, blank=True)
@@ -102,7 +104,7 @@ class Submission(models.Model):
         return f"{self.student_name.username}"
     
     def filename(self):
-        # return os.path.basename(self.attached_file.name)
+        # return os.path.basename(self.attached_file.name) APPLICABLE DURING DEVELOPMENT ONLY
         return self.attached_url
     
     def serialize(self):

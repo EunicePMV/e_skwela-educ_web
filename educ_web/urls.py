@@ -5,34 +5,25 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
 
-    # to be removed:
-    # path("login", views.login, name="login"),
-    # path("register", views.register, name="register"),
-
     path("calendar", views.calendar, name="calendar"),
-
-    path("indiv_file_comment/<int:course_id>", views.indiv_file_comment, name="indiv_file_comment"),
-
     path("home", views.home, name="home"),
     path("todo", views.todo, name="todo"),
-    # path("todo/missing", views.todo_missing, name="todo_missing"),
-    # path("todo/done", views.todo_done, name="todo_done"),
 
     path("edit_profile", views.edit_profile, name="edit_profile"),
 
-    # Instructor course indiv pages
+    # Instructor's Pages
     path("instruct/<int:course_id>", views.instruct_stream, name="instruct_stream"),
     path("instruct/people/<int:course_id>", views.instruct_people, name="instruct_people"),
     path("instruct/classwork/<int:course_id>", views.instruct_classwork, name="instruct_classwork"),
     path("instructor/mark/<int:course_id>", views.instruct_mark, name="instruct_mark"),
 
-    # Student course indiv pages
+    # Student's Pages
     path("course/<int:course_id>", views.student_stream, name="student_stream"),
     path("course/people/<int:course_id>", views.student_people, name="student_people"),
     path("course/classwork/<int:course_id>", views.student_classwork, name="student_classwork"),
     path("submission/<int:course_id>/<int:task_id>", views.submission , name="submission"),
 
-    # footer web pages
+    # Footer Pages
     path("about", views.about, name="about"),
     path("goals", views.goals, name="goals"),
     path("mission", views.mission, name="mission"),
@@ -57,7 +48,7 @@ urlpatterns = [
     path("grade/<int:student_id>/<int:course_id>/<int:task_id>", views.grade_act, name="grade_act"),
 ]
 
-# for accessing uploaded profile picture
+# Accessing Upload Files: APPLICABLE DURING DEVELOPMENT ONLY
 from django.conf import settings
 from django.conf.urls.static import static
 

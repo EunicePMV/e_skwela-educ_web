@@ -42,22 +42,17 @@
                             </li>
                         </ul>
 
-                        {% if user_profile %}
-                            <img src="{{ user_profile }}" class="user-pic" onclick="toggleMenu()">
-                        {% elif user.profile_picture %}
-                            <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                        {% if user.profile_url %}
+                            <img src="{{ user.profile_url }}" class="user-pic" onclick="toggleMenu()">
                         {% else %}
-                            <!-- <img src="{% static 'images/Profile.png' %}" class="user-pic" onclick="toggleMenu()"> -->
                             <img src="{% static 'images/user-person.png' %}" class="user-pic" onclick="toggleMenu()">
                         {% endif %}
 
                         <div class="sub-menu-wrap" id="subMenu">
                             <div class="sub-menu">
                                 <div class="user-info">
-                                    {% if user_profile %}
-                                        <img src="{{ user_profile }}" alt="User Image">
-                                    {% elif user.profile_picture %}
-                                        <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                                    {% if user.profile_url %}
+                                        <img src="{{ user.profile_url }}" alt="User Image">
                                     {% else %}
                                         <img src="{% static 'images/user-person.png' %}" alt="User Image">
                                     {% endif %}

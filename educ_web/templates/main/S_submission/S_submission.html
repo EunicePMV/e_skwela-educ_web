@@ -27,9 +27,6 @@
             <div class="main-instruct-container">
                 <div class="act-name-context" id="act-name-context">
                     {{ task.title | upper }}
-                    {% if user == course.instructor %}
-                        <img src="{% static '/images/Subtract.png' %}" id="edit-doc-logo" alt="Dark Edit File Document Logo" width="25" height="25">
-                    {% endif %}
                 </div>
                 <div class="instruct-details-container">
                     <span class="instruct-title-context">

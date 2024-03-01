@@ -15,6 +15,8 @@ from dotenv import load_dotenv
 
 from pathlib import Path
 
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8#fgc#m4rn=qrxp!f1g67^a5z3)q=pz4&v0=d3k$($ek0equny'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,7 +52,7 @@ INSTALLED_APPS = [
     # djago-widget-tweaks
     'widget_tweaks',
 
-    # django-cleanup for ImageFiel,FileField
+    # django-cleanup for ImageField,FileField
     'django_cleanup.apps.CleanupConfig',
 
     'whitenoise.runserver_nostatic',
@@ -63,7 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# django-allauth other settings
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
@@ -123,10 +124,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# ============================================================
-
 MIDDLEWARE = [
-    # "django.middleware.security.SecurityMiddleware",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -163,36 +161,11 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'educ_web',
-#         'USER': 'webdevgrp',
-#         'PASSWORD': 'webdevproj',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
 
-# USED WHEN DEPLOYED IN RAILWAY
-# DATABASES = {
-#     'default': {
-#         #'ENGINE': 'django.db.backends.sqlite3',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
-#         'HOST': 'containers-us-west-130.railway.app',
-#         'PORT': '6608',
-#     }
-# }
-
-load_dotenv()
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
 DATABASES = {
@@ -208,11 +181,6 @@ DATABASES = {
 
 TIME_ZONE = 'America/Chicago'
 USE_TZ = True
-
-
-# database: educ_web
-# user: webdevgrp
-# password: webdevproj
 
 
 # Password validation
@@ -268,7 +236,6 @@ AUTH_USER_MODEL = 'educ_web.User'
 # profile picture to upload
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
-# ADDED THIS 
-TEMP_UPLOAD_DIR = os.path.join(BASE_DIR, 'temp_uploads')
 
-# Eskwela08/23; course code: U69CFKD
+# ADDED THIS 
+# TEMP_UPLOAD_DIR = os.path.join(BASE_DIR, 'temp_uploads')
