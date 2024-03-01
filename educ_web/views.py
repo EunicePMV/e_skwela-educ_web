@@ -419,34 +419,16 @@ def save_attachment(request, course_id, task_id):
 
         attach_file = request.FILES["attach-file"]
         file_bytes = attach_file.read()
-        with open(f"{attach_file.name}.bin", "wb") as f:
 
-            f.write(file_bytes)
-
-            res = supabase.storage.from_("submission").get_public_url(f"{user}/profile-picture.jpeg")
-            try:
-                res = supabase.storage.from_("submission").update(file=f'{attach_file.name}.bin', path=f'./{task}/{user}', file_options={'cache-control': '3600', 'upsert': 'true'})
-            except StorageException:
-                res = supabase.storage.from_("submission").upload(file=f'{attach_file.name}.bin', path=f"./{task}/{user}", file_options={'content-type': attach_file.content_type})
+        res = supabase.storage.from_("submission").get_public_url(f"{task}/{user}")
+        try:
+            res = supabase.storage.from_("submission").update(file=file_bytes, path=f'./{task}/{user}', file_options={'cache-control': '3600', 'upsert': 'true', 'content-type': attach_file.content_type})
+        except StorageException:
+            res = supabase.storage.from_("submission").upload(file=file_bytes, path=f"./{task}/{user}", file_options={'content-type': attach_file.content_type})
 
         attachment_url = supabase.storage.from_('submission').get_public_url(f"{task}/{user}")
         submit_file = Submission(student_name=user, course=course, task=task, submission_status=submission_status, attached_url=attachment_url)
         submit_file.save()
-        # profile_picture = request.FILES["profilePicture"]
-        # bytes_content = profile_picture.read()
-        # with open(f'{profile_picture.name}.bin', 'wb') as f:
-        #     f.write(bytes_content)
-
-        #     res = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
-        #     try:
-        #         res = supabase.storage.from_("profile").update(file=f'{profile_picture.name}.bin', path=f'./{user}/profile-picture.jpeg', file_options={'cache-control': '3600', 'upsert': 'true'})
-        #     except StorageException:
-        #         res = supabase.storage.from_("profile").upload(file=f'{profile_picture.name}.bin', path=f"./{user}/profile-picture.jpeg", file_options={'content-type': 'image/jpeg'})
-
-        # profile_url = supabase.storage.from_("profile").get_public_url(f"{user}/profile-picture.jpeg")
-        # user.profile_url = profile_url
-        # submit_file = Submission(student_name=user, course=course, task=task, submission_status=submission_status, attached_file=attach_file)
-        # submit_file.save()
 
         return HttpResponseRedirect(reverse("submission", args=(course_id, task_id)))
 
