@@ -86,10 +86,10 @@ def home(request):
     except:
         # ADDED THIS 
         if request.user.profile_url:
-            user_profile = request.user.profile_url
+            # user_profile = request.user.profile_url
             return render(request, 'main/S_home/S_home.html', {
                 "user": request.user,
-                "user_profile": user_profile,
+                "user_profile": request.user.profile_url,
                 "enrolled_course": request.user.enrolled.all(),
                 "instruct_course": request.user.instruct_course.all(),
                 "week_date": week_date,
