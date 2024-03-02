@@ -1,6 +1,3 @@
-<!-- extends the layout of the course student stream html to get 
-    the side navbar and make layout consistent -->
-
 {% extends 'main/S_course/S_course_stream.html' %}
 
 {% load static %}
@@ -15,8 +12,8 @@
             </div>
             <hr />
             <div class="people-profile-instruct-container">
-                {% if instructor.profile_picture %}
-                    <img src="{{ instructor.profile_picture.url }}" alt="Instructor Profile Picture" class="people-instruct-main-img">
+                {% if instructor.profile_url %}
+                    <img src="{{ instructor.profile_url }}" alt="Instructor Profile Picture" class="people-instruct-main-img">
                 {% else %}
                     <img src="{% static 'images/user-person.png' %}" alt="Instructor Profile Picture" class="people-instruct-main-img">
                 {% endif %}
@@ -40,8 +37,8 @@
                         {% for student in students %}
                             <tr class="people-student-row-container">
                                 <td>
-                                    {% if student.profile_picture %}
-                                        <img src="{{ student.profile_picture.url }}" alt="Student Profile Picture" class="people-student-main-img">
+                                    {% if student.profile_url %}
+                                        <img src="{{ student.profile_url }}" alt="Student Profile Picture" class="people-student-main-img">
                                     {% else %}
                                         <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="people-student-main-img">
                                     {% endif %}
@@ -55,30 +52,6 @@
                                 </td>
                             </tr>
                         {% endfor %}
-                        <!-- <tr class="people-student-row-container">
-                            <td>
-                                <img src="{% static 'images/prsn2.png' %}" alt="Instructor Profile Picture" class="people-student-main-img">
-                            </td>
-                            <td class="people-student-name-main-context">
-                                Juan Dela Cruz
-                            </td>
-                        </tr>
-                        <tr class="people-student-row-container">
-                            <td>
-                                <img src="{% static 'images/prsn2.png' %}" alt="Instructor Profile Picture" class="people-student-main-img">
-                            </td>
-                            <td class="people-student-name-main-context">
-                                Juan Dela Cruz
-                            </td>
-                        </tr>
-                        <tr class="people-student-row-container">
-                            <td>
-                                <img src="{% static 'images/prsn2.png' %}" alt="Instructor Profile Picture" class="people-student-main-img">
-                            </td>
-                            <td class="people-student-name-main-context">
-                                Juan Dela Cruz
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
             </div>

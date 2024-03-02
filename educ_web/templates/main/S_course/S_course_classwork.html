@@ -1,6 +1,3 @@
-<!-- extends the layout of the course stream html to get 
-    the side navbar and make layout consistent -->
-
 {% extends 'main/S_course/S_course_stream.html' %}
 
 {% load static %}
@@ -42,15 +39,3 @@
         </div>
     </div>
 {% endblock %}
-
-{% comment %}
-    1. if any submission, reflect in the submission page with the unsubmit button
-    2. if submitting, when submit button is click, show unsubmit button
-
-    Other solution
-    1. using JS, load the current submission
-    2. usin JS, post the attach file
-
-    CURRENT SOLUTION:
-    1. submitted file works in django
-{% endcomment %}

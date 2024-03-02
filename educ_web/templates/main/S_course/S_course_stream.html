@@ -89,8 +89,8 @@
                 {% block student_stream_course %}
                     <div class="course-student-post-container">
                         <div class="post-container-heading">
-                            {% if user.profile_picture %}
-                                <img src="{{ user.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                            {% if user.profile_url %}
+                                <img src="{{ user.profile_url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                             {% else %}
                                 <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                             {% endif %}
@@ -118,8 +118,8 @@
                                 {% if post.creator %}
                                     <div class="main-post-content">
                                         <div class="main-post-heading-container">
-                                            {% if post.creator.profile_picture %}
-                                                <img src="{{ post.creator.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% if post.creator.profile_url %}
+                                                <img src="{{ post.creator.profile_url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% else %}
                                                 <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% endif %}
@@ -144,8 +144,8 @@
                                 {% else %}
                                     <div class="main-post-content main-task-content">
                                         <div class="main-post-heading-container">
-                                            {% if course.instructor.profile_picture %}
-                                                <img src="{{ course.instructor.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% if course.instructor.profile_url %}
+                                                <img src="{{ course.instructor.profile_url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% else %}
                                                 <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% endif %}

@@ -3,11 +3,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import os
 
-# Create your models here.
+"""
+Custom User Model
+"""
 class User(AbstractUser):
     first_name = models.CharField(max_length=20, blank=True)
     last_name = models.CharField(max_length=20, blank=True)
     profile_picture = models.ImageField(upload_to="users/", null=True, blank=True)
+    profile_url = models.URLField(null=True, blank=True)
     
     def serialize(self):
         return {
@@ -16,6 +19,7 @@ class User(AbstractUser):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
+            "profile_url": self.profile_url,
         }
     
     def filename(self):
@@ -92,14 +96,16 @@ class Submission(models.Model):
     task = models.ForeignKey(Task, related_name="submission", on_delete=models.CASCADE)
     submission_date = models.DateTimeField(auto_now_add=True, editable=False)
     submission_status = models.BooleanField(default=False)
-    attached_file = models.FileField(upload_to=f"submission/{course.name}", blank=True)
+    # attached_file = models.FileField(upload_to=f"submission/{course.name}", blank=True) APPLICABLE DURING DEVELOPMENT ONLY
+    attached_url = models.URLField(blank=True, null=True)
     student_grade = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.student_name.username}"
     
     def filename(self):
-        return os.path.basename(self.attached_file.name)
+        # return os.path.basename(self.attached_file.name) APPLICABLE DURING DEVELOPMENT ONLY
+        return self.attached_url
     
     def serialize(self):
         return {
