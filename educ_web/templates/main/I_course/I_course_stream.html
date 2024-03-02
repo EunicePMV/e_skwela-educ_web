@@ -5,10 +5,10 @@
 {% block script %}
     <link href="{% static 'I_course/I_course_stream.css' %}" rel="stylesheet">
     
-    <!-- classwork page -->
+    <!-- CLASSWORK PAGE -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <!-- people page -->
+    <!-- PEOPLE PAGE -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -125,8 +125,8 @@
                 {% block instruct_stream_course %}
                     <div class="course-post-container">
                         <div class="post-container-heading">
-                            {% if user.profile_picture %}
-                                <img src="{{ user.profile_picture.url }}" alt="Instructor Profile Picture" class="instruct-profile-picture">
+                            {% if user.profile_url %}
+                                <img src="{{ user.profile_url }}" alt="Instructor Profile Picture" class="instruct-profile-picture">
                             {% else %}
                                 <img src="{% static 'images/user-person.png' %}" alt="Instructor Profile Picture" class="instruct-profile-picture">
                             {% endif %}
@@ -154,8 +154,8 @@
                                 {% if post.creator %}
                                     <div class="main-post-content">
                                         <div class="main-post-heading-container">
-                                            {% if post.creator.profile_picture %}
-                                                <img src="{{ post.creator.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% if post.creator.profile_url %}
+                                                <img src="{{ post.creator.profile_url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% else %}
                                                 <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% endif %}
@@ -180,8 +180,8 @@
                                 {% else %}
                                     <div class="main-post-content main-task-content">
                                         <div class="main-post-heading-container">
-                                            {% if course.instructor.profile_picture %}
-                                                <img src="{{ course.instructor.profile_picture.url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
+                                            {% if course.instructor.profile_url %}
+                                                <img src="{{ course.instructor.profile_url }}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% else %}
                                                 <img src="{% static 'images/user-person.png' %}" alt="Student Profile Picture" class="student-profile-picture-main-post">
                                             {% endif %}
@@ -213,13 +213,6 @@
                                                 {% endif %}
                                             </div>
                                         </div>
-                                        {% if post.type != 'MATERIAL' %}
-                                            <div class="view-post-container">
-                                                <a href="{% url 'submission' course_id=course.id task_id=post.id %}">
-                                                    <ion-icon name="eye-outline" class=""></ion-icon>
-                                                </a>
-                                            </div>
-                                        {% endif %}
                                 </div>
                                 {% endif %}
                             {% endfor %}
