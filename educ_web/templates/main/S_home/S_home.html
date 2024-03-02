@@ -42,24 +42,27 @@
                         </li>
                     </ul>
 
-                    {% if user_profile %}
-                        <img src="{{ user_profile }}" class="user-pic" onclick="toggleMenu()">
-                    {% elif user.profile_picture %}
-                        <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                    {% if user.profile_url %}
+                        <img src="{{ user.profile_url }}" class="user-pic" onclick="toggleMenu()">
+                    {% comment %}
+                        {% elif user.profile_url %}
+                        <img src="{{ user.profile_url }}" class="user-pic" onclick="toggleMenu()">
+                    {% endcomment %}
                     {% else %}
-                        <!-- <img src="{% static 'images/Profile.png' %}" class="user-pic" onclick="toggleMenu()"> -->
-                        <img src="{% static 'images/user-person.png' %}" class="user-pic" onclick="toggleMenu()">
+                            <img src="{% static 'images/user-person.png' %}" class="user-pic" onclick="toggleMenu()">
                     {% endif %}
 
                     <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
                             <div class="user-info">
-                                {% if user_profile %}
-                                    <img src="{{ user_profile }}" alt="User Image">
-                                {% elif user.profile_picture %}
-                                    <img src="{{ user.profile_picture.url }}" class="user-pic" onclick="toggleMenu()">
+                                {% if user.profile_url %}
+                                    <img src="{{ user.profile_url }}" alt="User Image">
+                                {% comment %}
+                                    {% elif user.profile_url %}
+                                    <img src="{{ user.profile_url }}" class="user-pic" onclick="toggleMenu()">
+                                {% endcomment %}
                                 {% else %}
-                                    <img src="{% static 'images/user-person.png' %}" alt="User Image">
+                                <img src="{% static 'images/user-person.png' %}" alt="User Image">
                                 {% endif %}
 
                                 {% if user.first_name and user.last_name %}
@@ -110,7 +113,7 @@
                 {% endfor %}
             </div>
             <div class="dashboard-courses">
-                <!-- render enrolled course of this user -->
+                <!-- RENDER ENROLLED COURSE -->
                 {% if enrolled_course %}
                     {% for course in enrolled_course %}
                         <div class="courses">
@@ -128,8 +131,8 @@
                                 </h6>
                             </a>
                             <div class="professor">
-                                {% if course.instructor.profile_picture %}
-                                    <img src="{{ course.instructor.profile_picture.url }}">
+                                {% if course.instructor.profile_url %}
+                                    <img src="{{ course.instructor.profile_url }}">
                                 {% else %}
                                     <img src="{% static 'images/user-person.png' %}">
                                 {% endif %}
@@ -150,7 +153,7 @@
         <hr />
         <div class="container"
             style="text-align: center; justify-content: center; display: flex; padding-bottom: 50px;">
-            <!-- render instructed course of this user -->
+            <!-- RENDER INSTRUCTURED COURSE -->
             {% for course in instruct_course %}
                 <div class="courses">
                     <a href="{% url 'instruct_stream' course_id=course.id %}">
@@ -167,8 +170,8 @@
                         </h6>
                     </a>
                     <div class="professor">
-                        {% if course.instructor.profile_picture %}
-                            <img src="{{ course.instructor.profile_picture.url }}">
+                        {% if course.instructor.profile_url %}
+                            <img src="{{ course.instructor.profile_url }}">
                         {% else %}
                             <img src="{% static 'images/user-person.png' %}">
                         {% endif %}
@@ -307,7 +310,7 @@
 {% endblock %}
 
 {% block profileModal %}
-<!-- modal for editing profile -->
+<!-- EDIT PROFILE MODAL -->
     <div class="modal fade" id="manual-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
@@ -360,7 +363,7 @@
         </div>
     </div>
     <script>
-        
+
         // Expanded
         function expandDiv(id) {
             var div = document.getElementById(id);

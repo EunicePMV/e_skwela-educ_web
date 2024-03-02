@@ -13,8 +13,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 # FIX THE SOCIAL MEDIA ACCOUNTS IN DEPLOYMENT
 
 import os
+from dotenv import load_dotenv
 
 from pathlib import Path
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,11 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8#fgc#m4rn=qrxp!f1g67^a5z3)q=pz4&v0=d3k$($ek0equny'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 
@@ -51,7 +55,7 @@ INSTALLED_APPS = [
     # djago-widget-tweaks
     'widget_tweaks',
 
-    # django-cleanup for ImageFile,FileField
+    # django-cleanup for ImageField,FileField
     'django_cleanup.apps.CleanupConfig',
 
     'whitenoise.runserver_nostatic',
@@ -64,7 +68,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# django-allauth other settings
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
@@ -124,10 +127,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# ============================================================
-
 MIDDLEWARE = [
-    # "django.middleware.security.SecurityMiddleware",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -169,38 +169,21 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 #     }
 # }
 
-# USED WHEN DEPLOYED IN RAILWAY
-# DATABASES = {
-#     'default': {
-#         #'ENGINE': 'django.db.backends.sqlite3',
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 's2VVWcOOu4wN1fnDfEYX',
-#         'HOST': 'containers-us-west-130.railway.app',
-#         'PORT': '6608',
-#     }
-# }
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cgtekqbt',
-        'USER': 'cgtekqbt',
-        'PASSWORD': 'RznB3-foLMwl0q9sW_r5H3GiOWuXOrUa',
-        'HOST': 'tyke.db.elephantsql.com',
-        'PORT': '5432',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
 TIME_ZONE = 'America/Chicago'
 USE_TZ = True
-
-
-# database: educ_web
-# user: webdevgrp
-# password: webdevproj
 
 
 # Password validation
@@ -237,10 +220,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'staticfiles/'
-STATIC_ROOT = BASE_DIR / "staticfiles" # COMMENTED THIS
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "static" # CHANGE FROM 'staticfiles' into 'static'
 # STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static") # COMMENTED THIS
+#     os.path.join(BASE_DIR, "static")
 # ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -257,9 +240,5 @@ AUTH_USER_MODEL = 'educ_web.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
 
-# client_id = 724125503755-kpfe1kt92tp30r0dhdmo5jjsa1ch6tqq.apps.googleusercontent.com
-# client_secret = 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
-
-# admin
-# EunicePMV
-# Eskwela08/23
+# ADDED THIS 
+# TEMP_UPLOAD_DIR = os.path.join(BASE_DIR, 'temp_uploads')
