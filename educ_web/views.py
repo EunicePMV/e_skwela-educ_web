@@ -51,8 +51,8 @@ def home(request):
         course_enrolled = user.user.enrolled.all()
         course_instruct = user.user.instruct_course.all()
 
-        if user.user.profile_picture:
-            user_profile = user.user.profile_picture.url
+        if user.user.profile_url:
+            user_profile = user.user.profile_url
 
             return render(request, 'main/S_home/S_home.html', {
                 "user": user.user,
@@ -279,8 +279,8 @@ def join_course(request):
                 course_enrolled = user.user.enrolled.all()
                 course_instruct = user.user.instruct_course.all()
 
-                if(user.user.profile_picture):
-                    user_profile = user.user.profile_picture.url
+                if(user.user.profile_url):
+                    user_profile = user.user.profile_url
 
                     return render(request, 'main/S_home/S_home.html', {
                         "user": user.user,
