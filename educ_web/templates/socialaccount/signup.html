@@ -1,0 +1,44 @@
+{% comment %}
+    allauth is not rendering, hence, elements do not load
+{% endcomment %}
+{% load i18n %}
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'register/verification.css' %}">
+    <title>Google Sign Up</title>
+</head>
+<body>
+    {% block content %}
+        <div id="external-container">
+            <div id="internal-container">
+                <h1 id="sign-up-main-txt">
+                    Sign In Via Google
+                </h1>
+            </div>
+        </div>
+        {% url 'socialaccount_signup' as action_url %}
+        {% element form form=form method="post" action=action_url %}
+            {% slot body %}
+                {% csrf_token %}
+                {% element fields form=form unlabeled=True %}
+                {% endelement %}
+                {% if redirect_field_value %}
+                    <input type="hidden"
+                        name="{{ redirect_field_name }}"
+                        value="{{ redirect_field_value }}" />
+                {% endif %}
+            {% endslot %}
+            {% slot actions %}
+                {% element button type="submit" %}
+                    {% trans "Sign Up" %}
+                {% endelement %}
+            {% endslot %}
+        {% endelement %}
+    {% endblock %}
+</body>
+</html>

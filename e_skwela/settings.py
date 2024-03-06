@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'educ_web',
 
     # django-allauth
-    'django.contrib.sites',
     'allauth',
+    'django.contrib.sites',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
@@ -82,7 +82,7 @@ LOGIN_REDIRECT_URL = '/home'
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 ACCOUNT_LOGOUT_ON_GET = True
-# ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_VERIFICATION = "none" 
@@ -160,12 +160,12 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
@@ -219,7 +219,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "static" # CHANGE FROM 'staticfiles' into 'static'
+STATIC_ROOT = BASE_DIR / "staticfiles" # CHANGE FROM 'staticfiles' into 'static'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static")
 # ]

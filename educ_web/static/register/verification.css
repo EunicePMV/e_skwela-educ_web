@@ -1,0 +1,21 @@
+#external-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#internal-container {
+    height: 495px;
+    width: 450px;
+    padding: 2.5rem 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 2.5%;
+    display: block;
+    margin: auto;
+}
+
+#sign-up-main-txt {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
