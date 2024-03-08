@@ -39,9 +39,10 @@ ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 INSTALLED_APPS = [
     'educ_web',
 
+    'django.contrib.sites',
+
     # django-allauth
     'allauth',
-    'django.contrib.sites',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
@@ -134,6 +135,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'e_skwela.urls'
