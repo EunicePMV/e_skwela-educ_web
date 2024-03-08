@@ -1,0 +1,52 @@
+{% comment %}
+    SOLUTION:
+    1. fix the verification process
+    2. check other functionalities if there are errors
+{% endcomment %}
+
+{% load i18n %}
+
+{% load allauth %}
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/images/favicon-16x16.png' %}">
+    <link rel="stylesheet" href="{% static 'register/verification.css' %}">
+    <title>Google Sign Up</title>
+</head>
+<body>
+    {% block content %}
+        <div id="external-container">
+            <div id="internal-container">
+                <h1 id="sign-up-main-txt">
+                    Sign In Via Google
+                </h1>
+                <div id="descp-container">
+                    You are about to sign in using a third-party account from Google
+                </div>
+                <div id="button-container">
+                    {% element form method="post" no_visible_fields=True %}
+                        {% slot actions %}
+                            {% csrf_token %}
+                            {% comment %}
+                                {% element button type="submit" %}
+                                    {% trans "Continue" %}
+                                {% endelement %}
+                            {% endcomment %}
+                            <button type="submit" id="continue-button">
+                                Continue
+                            </button>
+                        {% endslot %}
+                    {% endelement %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

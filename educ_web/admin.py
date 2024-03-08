@@ -4,19 +4,19 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User, Post, Task, Course, Submission
 
 class UserAdmin(UserAdmin):
-    list_display = ["date_joined", "username", "email", "first_name", "last_name"]
+    list_display = ["date_joined", "username", "email", "first_name", "last_name", "profile_url"]
     model = UserAdmin
 
-    fieldsets = UserAdmin.fieldsets + (
-        (
-            "Extra Fields",
-            {
-                "fields": (
-                    "profile_picture",
-                )
-            },
-        ),
-    )
+    # fieldsets = UserAdmin.fieldsets + (
+    #     (
+    #         "Extra Fields",
+    #         {
+    #             "fields": (
+    #                 "profile_picture",
+    #             )
+    #         },
+    #     ),
+    # )
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Course)

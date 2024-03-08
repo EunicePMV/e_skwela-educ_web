@@ -39,8 +39,9 @@ ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 INSTALLED_APPS = [
     'educ_web',
 
-    # django-allauth
     'django.contrib.sites',
+
+    # django-allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -134,6 +135,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'e_skwela.urls'
@@ -160,12 +162,12 @@ WSGI_APPLICATION = 'e_skwela.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # USED WHEN DEPLOYED IN ELEPHANTSQL (CURRENT)
@@ -219,7 +221,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "static" # CHANGE FROM 'staticfiles' into 'static'
+STATIC_ROOT = BASE_DIR / "staticfiles" # CHANGE FROM 'staticfiles' into 'static'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static")
 # ]

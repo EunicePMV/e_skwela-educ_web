@@ -9,7 +9,7 @@ Custom User Model
 class User(AbstractUser):
     first_name = models.CharField(max_length=20, blank=True)
     last_name = models.CharField(max_length=20, blank=True)
-    profile_picture = models.ImageField(upload_to="users/", null=True, blank=True)
+    # profile_picture = models.ImageField(upload_to="users/", null=True, blank=True)
     profile_url = models.URLField(null=True, blank=True)
     
     def serialize(self):
@@ -22,8 +22,8 @@ class User(AbstractUser):
             "profile_url": self.profile_url,
         }
     
-    def filename(self):
-        return os.path.basename(self.profile_picture.name)
+    # def filename(self):
+    #     return os.path.basename(self.profile_picture.name)
 
 class Course(models.Model):
     name = models.CharField(max_length=64)

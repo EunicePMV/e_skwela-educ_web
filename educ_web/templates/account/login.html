@@ -37,13 +37,11 @@
         
         
         <input type="submit" value="SIGN IN" id="submit">
-        <!-- <p class="message1"><a href="{{ account_reset_password }}">Forgot password?</a></p> -->
-        <!-- <p class="message1">or continue with</p> -->
+        <p class="message1"><a href="{{ account_reset_password }}">Forgot password?</a></p>
+        <p class="message1">or continue with</p>
         <div class="alt-signin">
-          {% comment %}
-            <!-- <div class="btn-altsignin"><a href="{% provider_login_url 'google' %}"><img src="{% static '/images/google.png' %}" alt="google" class="google-fb-a-tag"></a></div>
-            <div class="btn-altsignin"><a href="{% provider_login_url 'facebook' method='oauth2' %}"><img src="{% static '/images/facebook.png' %}" alt="facebook" class="google-fb-a-tag"></a></div> -->
-          {% endcomment %}
+            <div class="btn-altsignin"><a href="{% provider_login_url 'google' %}"><img src="{% static '/images/google.png' %}" alt="google" class="google-fb-a-tag"></a></div>
+            <div class="btn-altsignin"><a href="{% provider_login_url 'facebook' method='oauth2' %}"><img src="{% static '/images/facebook.png' %}" alt="facebook" class="google-fb-a-tag"></a></div>
             <p class="message2">Don't have an account yet?</p>
           <a href="{% url 'account_signup' %}">Register for free</a>
         </div>
