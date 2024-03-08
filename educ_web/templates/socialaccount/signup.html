@@ -20,12 +20,14 @@
     {% block content %}
         <div id="external-container">
             <div id="internal-container">
-                <h1 id="sign-up-main-txt">
-                    Sign In Via Google
-                </h1>
-                <div id="descp-container">
-                    As a final step, please complete the following form:
-                </div>
+                {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}
+                    <h1 id="sign-up-main-txt">
+                        Sign In Via {{provider_name}}
+                    </h1>
+                    <div id="descp-container">
+                        As a final step, please complete the following form:
+                    </div>
+                {% endblocktrans %}
                 <div id="sign-form-container">
                     {% url 'socialaccount_signup' as action_url %}
                     {% element form form=form method="post" action=action_url %}

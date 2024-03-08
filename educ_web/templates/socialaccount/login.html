@@ -24,12 +24,14 @@
     {% block content %}
         <div id="external-container">
             <div id="internal-container">
-                <h1 id="sign-up-main-txt">
-                    Sign In Via Google
-                </h1>
-                <div id="descp-container">
-                    You are about to sign in using a third-party account from Google
-                </div>
+                {% blocktrans with provider.name as provider %}
+                    <h1 id="sign-up-main-txt">
+                        Sign In Via {{ provider }}
+                    </h1>
+                    <div id="descp-container">
+                        You are about to sign in using a third-party account from {{ provider }}
+                    </div>
+                {% endblocktrans %}
                 <div id="button-container">
                     {% element form method="post" no_visible_fields=True %}
                         {% slot actions %}
